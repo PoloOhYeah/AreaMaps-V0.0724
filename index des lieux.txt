@@ -1,0 +1,5 @@
+Boutique ou petit Magasin : BOUTIQUEPARIS9
+HyperMarché : shopPARIS9
+
+
+Nom associé à l'image dans le code JS !

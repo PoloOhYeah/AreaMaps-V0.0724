@@ -1,0 +1,5919 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.min.js"></script>
+    <title>Area Maps</title>
+    <link rel="shortcut icon" href="https://searcharea.ddns.net/searchicon.png" />   
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://searcharea.ddns.net/styles.css" />
+
+
+<style>
+    body, html, #map {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .custom-menu {
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .custom-menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .custom-menu ul li {
+        cursor: pointer;
+        padding: 4px 0;
+    }
+
+    .custom-menu ul li:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+
+
+
+<script type="text/javascript" src="https://searcharea.ddns.net/scriptmaps.js"></script>
+
+
+<style>
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+
+  header div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  
+
+  input[type="text"] {
+    background-color: #fff;
+    border: 1px solid black;
+    color: #000000;
+    padding: 10px;
+    width: 80%;
+    margin-right: 10px;
+    border-radius: 23px;
+  }
+
+  header a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+</style>
+
+
+
+    
+    
+    
+  <div id="map" style="width: 100%;">
+<style>
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<script src="https://searcharea.ddns.net/leaflet.js"></script> <!-- Chemin vers le fichier JavaScript local -->
+    <script src="https://unpkg.com/leaflet-measure/dist/leaflet-measure.min.js"></script> <!-- Inclure le plugin Leaflet.Measure -->
+
+    <script>
+        // Don't forget to replace <YOUR_ACCESS_TOKEN> by your real access token ! 
+            const accessToken = 'IQuu6nhyqlTGIY23gDB6zhMfJsKAgdaVwOCMVa5dnPeoBQ0ibjx1LDnntDSHbzKG';
+        // Set your custom style ID. To get your custom style ID see https://www.jawg.io/docs/maps#get-custom-style-id
+        const styleId = '86d6bce3-fa6f-47c7-8e94-a30d597b7a15';
+        const map = L.map('map').setView([48.9070392,2.3569261], 9.98);
+        L.tileLayer(
+            `https://tile.jawg.io/86d6bce3-fa6f-47c7-8e94-a30d597b7a15/{z}/{x}/{y}.png?access-token=IQuu6nhyqlTGIY23gDB6zhMfJsKAgdaVwOCMVa5dnPeoBQ0ibjx1LDnntDSHbzKG`, {
+            attribution: '<a href="aboutmaps.html" title="Tiles Courtesy of Jawg Maps" target="_blank" class="jawg-attrib">&copy; <b>Search</b>Area</a> '  ,
+            maxZoom: 24
+        }).addTo(map);
+
+        if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+
+                    var marker = L.marker([lat, lon]).addTo(map);
+                    
+                    // Ajoutez du texte au marqueur
+                    marker.bindPopup("La position peut être précise ou approximative selon vos paramètres. <br><a href='https://searcharea.ddns.net/userposition.html'>a propos la localisation</a>").openPopup();
+                    
+                    marker.on('click', function() {
+                        marker.openPopup();
+                    });
+
+                    map.setView([lat, lon], 13);
+                });
+            };
+
+
+
+    
+
+
+
+
+
+    var myIcon = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.099443503273754, 2.525513074646554], {icon: myIcon}).addTo(map).bindPopup("Survilliers-Fosses<br>RER D et BUS<br><a href='aboutfossesrerd.html'>Plus d'information</a>");
+
+
+
+
+var leshalles = L.icon({
+    iconUrl: 'Paris_transit_icons_-_Train.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86194219845679, 2.34666766580676], {icon: leshalles}).addTo(map).bindPopup("Chatelet-les-Halles<br>RER A, B, D Metro et BUS<br><a href='aboutchateletrermetrobus.html'>Plus d'information</a>");
+
+
+
+
+var gdn = L.icon({
+    iconUrl: 'Paris_transit_icons_-_Train.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.881164154513684, 2.35469799244917], {icon: gdn}).addTo(map).bindPopup("Gare du Nord<br>RER B et D, Transilien H,  Metro et BUS<br><a href='aboutgaredunordparis.html'>Plus d'information</a>");
+
+
+
+
+
+
+var est = L.icon({
+    iconUrl: 'Paris_transit_icons_-_Train.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87786059195781, 2.360681724343013], {icon: est}).addTo(map).bindPopup("Gare de l'Est <br>RER E, Transilien P, Metro, TGV et TER<br><a href='aboutgaredelestparis.html'>Plus d'information</a>");
+
+
+
+
+var stf = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.91776370282559, 2.3499039549672123], {icon: stf}).addTo(map).bindPopup("Stade de France - St Denis <br>RER D et BUS<br><a href='aboutstadedefrancererd.html'>Plus d'information</a>");
+
+
+
+
+var strer = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.934849257153, 2.345368850852462], {icon: strer}).addTo(map).bindPopup("Saint Denis <br>RER D, Tramway et BUS<br><a href='aboutstdenisrerd.html'>Plus d'information</a>");
+
+
+
+
+var piefi = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.96393237402921, 2.3724017725613478], {icon: piefi}).addTo(map).bindPopup("Pierrefitte - Stains <br>RER D et BUS<br><a href='aboutpierrefitestainsrerd.html'>Plus d'information</a>");
+
+
+
+
+
+var sar = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.97677854600487, 2.390603516470463], {icon: sar}).addTo(map).bindPopup("Garges-Sarcelles <br>RER D, Tramway et BUS<br><a href='aboutgargesrerd.html'>Plus d'information</a>");
+
+
+
+
+var vbel = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.994120315021085, 2.416870938637186], {icon: vbel}).addTo(map).bindPopup("Villiers-le-Bel <br>RER D et BUS<br><a href='aboutvillierslebelrerd.html'>Plus d'information</a>");
+
+
+
+
+var goussrer = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.023612266130364, 2.462454395673591], {icon: goussrer}).addTo(map).bindPopup("Goussainville <br>RER D et BUS<br><a href='aboutgoussainvillererd.html'>Plus d'information</a>");
+
+
+
+var goussrer2 = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.032660901037715, 2.4766754079788518], {icon: goussrer2}).addTo(map).bindPopup("Les Noues <br>RER D<br><a href='lesnouesrerd.html'>Plus d'information</a>");
+
+
+
+
+
+var louvrerer = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.049434026881165, 2.501728580698005], {icon: louvrerer}).addTo(map).bindPopup("Louvre <br>RER D et BUS<br><a href='aboutlouvrererd.html'>Plus d'information</a>");
+
+
+
+
+
+
+var gdlyon = L.icon({
+    iconUrl: 'Paris_transit_icons_-_Train.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84434471240587, 2.3744486774856153], {icon: gdlyon}).addTo(map).bindPopup("Gare de Lyon <br>RER A, D, Metro, TGV et TER et BUS<br><a href='aboutgaredelyonrerdatgv.html'>Plus d'information</a>");
+
+
+
+
+
+var monttgv = L.icon({
+    iconUrl: 'Paris_transit_icons_-_Train.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83978089806996, 2.318301384291999], {icon: monttgv}).addTo(map).bindPopup("Gare Montparnasse <br>Transilien N, Metro, TGV, TER et BUS<br><a href='aboutmontparnasserertgvmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var laz = L.icon({
+    iconUrl: 'Paris_transit_icons_-_Train.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87674443536111, 2.3250142554952165], {icon: laz}).addTo(map).bindPopup("Gare St Lazare<br>Transilien et TER<br><a href='aboutstlazarererter.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85953866183684, 2.347058784638902], {icon: metro}).addTo(map).bindPopup("Chatelet<br>Metro 1, 4, 7, 11, 14<br><a href='aboutchateletmetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85838416444201, 2.3421554270750446], {icon: metro}).addTo(map).bindPopup("Pont-Neuf<br>Metro 7<br><a href='aboutpontneufmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.862369502399034, 2.3367152819664323], {icon: metro}).addTo(map).bindPopup("Palais Royal -  Musée du Louvre<br>Metro 7, 1<br><a href='aboutpalaisroyalemetro71.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86544226718383, 2.334673002819025], {icon: metro}).addTo(map).bindPopup("Pyramides <br>Metro 7, 14<br><a href='aboutpyramidesmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8708418308615, 2.3321872728895974], {icon: metro}).addTo(map).bindPopup("Opéra <br>Metro 3, 7, 8<br><a href='aboutoperametro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8708418308615, 2.3321872728895974], {icon: metro}).addTo(map).bindPopup("Opéra <br>Metro 7, 9 <br><a href='aboutoperametro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.874724587489034, 2.339860772096704], {icon: metro}).addTo(map).bindPopup("Le Peletier <br>Metro 7 <br><a href='aboutlepeletiermetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87602305106201, 2.343997514388681], {icon: metro}).addTo(map).bindPopup("Cadet <br>Metro 7 <br><a href='aboutcadetmetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.877310627967425, 2.3491455153977387], {icon: metro}).addTo(map).bindPopup("Poissonnière <br>Metro 7 <br><a href='aboutpoissonmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.876277974266166, 2.3598780377090325], {icon: metro}).addTo(map).bindPopup("Gare de l'Est <br>Metro 7 <br><a href='aboutgaredelestmetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.878904890193915, 2.362073917434538], {icon: metro}).addTo(map).bindPopup("Chateau Landon <br>Metro 7 <br><a href='aboutchateaulandonmetro.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88830844840918, 2.374162022619169], {icon: metro}).addTo(map).bindPopup("Riquet <br>Metro 7 <br><a href='aboutriquetmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.891421914971374, 2.3775869094766002], {icon: metro}).addTo(map).bindPopup("Crimée <br>Metro 7 <br><a href='aboutcrimeemetro.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89481269396987, 2.3822732302711103], {icon: metro}).addTo(map).bindPopup("Corentin Cariou <br>Metro 7 <br><a href='aboutcorentincarioumetro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89748546631708, 2.3858275712657475], {icon: metro}).addTo(map).bindPopup("Porte de la Villette <br>Metro 7 <br><a href='aboutvillettemetro.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.903692727583234, 2.3918482258144294], {icon: metro}).addTo(map).bindPopup("Aubervilliers-Pantin Quatre Chemins <br>Metro 7 <br><a href='aboutaubervilliersmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.914581084063116, 2.403702682378594], {icon: metro}).addTo(map).bindPopup("Fort d'Aubervilliers  <br>Metro 7 <br><a href='aboutfortaubermetro7.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.9205608678359, 2.4101577594260846], {icon: metro}).addTo(map).bindPopup("La Courneuve - 8 Mai 1945 <br>Metro 7 <br><a href='aboutlacourneuvemetro7.html'>Plus d'information</a>");
+
+
+
+
+var auber = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87229160244899, 2.3296597041615446], {icon: auber}).addTo(map).bindPopup("Auber <br>RER A <br><a href='aboutauberrera.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87354356800566, 2.3272338147493223], {icon: metro}).addTo(map).bindPopup("Havre - Caumartin <br>Metro 3, 9 <br><a href='abouthavrecaumartinmetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87303715279617, 2.3330851534846957], {icon: metro}).addTo(map).bindPopup("Chaussée d'Antin - La Fayette <br>Metro 7, 9 <br><a href='aboutchausseefayettemetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8745860358364, 2.320215103869468], {icon: metro}).addTo(map).bindPopup("Saint-Augustin <br>Metro 9 <br><a href='aboutstaugustinmetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87356633801439, 2.314296767135087], {icon: metro}).addTo(map).bindPopup("Miromesnil <br>Metro 9, 13 <br><a href='aboutmiromesnilmetro.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87227934353256, 2.3100018181145554], {icon: metro}).addTo(map).bindPopup("Saint-Philippe-du-Roule <br>Metro 9 <br><a href='aboutstphilipemetro9.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86902528825963, 2.309903399101517], {icon: metro}).addTo(map).bindPopup("Franklin D. Roosevelt <br>Metro 1, 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86481180181075, 2.301727046398204], {icon: metro}).addTo(map).bindPopup("Alma-Marceau <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.864510502173566, 2.2929927221201156], {icon: metro}).addTo(map).bindPopup("LÃ©na<br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86320016157932, 2.286548461809492], {icon: metro}).addTo(map).bindPopup("TrocadÃ©ro<br>Metro 6, 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8640943902269, 2.2778158418165626], {icon: metro}).addTo(map).bindPopup("Rue de la Pompe <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.858206327740355, 2.2742237338596643], {icon: metro}).addTo(map).bindPopup("La Muette <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85550433616836, 2.270117023612686], {icon: metro}).addTo(map).bindPopup("Ranelagh <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85247235335504, 2.2681442042018443], {icon: metro}).addTo(map).bindPopup("Jasmin <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84789099474035, 2.264168711957912], {icon: metro}).addTo(map).bindPopup("Michel-Ange - Auteuil <br>Metro 9, 10 <br><a href='aboutmichelangemetro.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.845162461575384, 2.261692071871405], {icon: metro}).addTo(map).bindPopup("Michel-Ange - Molitor <br>Metro 9, 10 <br><a href='aboutmichelangemolimetro.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8429644586742, 2.259926306883221], {icon: metro}).addTo(map).bindPopup("Exelmans <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83796384800766, 2.2571313012084335], {icon: metro}).addTo(map).bindPopup("Porte de Saint-Cloud <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83362495129158, 2.2431888178953012], {icon: metro}).addTo(map).bindPopup("Marcel Sembat <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83197110347556, 2.2383152529092802], {icon: metro}).addTo(map).bindPopup("Billancourt <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82953480251928, 2.2301651950315255], {icon: metro}).addTo(map).bindPopup("Pont de SÃ¨vres <br>Metro 9 <br><a href='aboutmetro9fraroosevelttopontsevremetro9.html'>Plus d'information</a>");
+
+
+
+//truc batiment et entreprise
+
+
+
+var inuse = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83742295370379, 2.2406367220401635], {icon: inuse}).addTo(map).bindPopup("InUse <br>Entreprise de Logiciel <br><a href='aboutinusebillancourt.html'>Plus d'information</a>");
+
+//fin du truc
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8625275873799, 2.345940388669624], {icon: metro}).addTo(map).bindPopup("Les Halles <br>Metro 4 <br><a href='aboutleshallesmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var ecole = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.99274654851732, 2.3829574417580655], {icon: ecole}).addTo(map).bindPopup("LycÃ©e Maryse-CondÃ© <br>BAC Pro, LycÃ©e<br><a href='aboutlyceecondesarcelles.html'>Plus d'information</a>");
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.99298597562066, 2.3832900417446004], {icon: bus}).addTo(map).bindPopup("LycÃ©e de la Tourelle <br>BUS 269, 370 <br><a href='aboutlyceebus269370.html'>Plus d'information</a>");
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.9937814838783, 2.382324458090647], {icon: bus}).addTo(map).bindPopup("LycÃ©e de la Tourelle <br>BUS 370 <br><a href='aboutlyceebus370to268.html'>Plus d'information</a>");
+
+
+
+
+var ecole = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.993985602507045, 2.384373728758613], {icon: ecole}).addTo(map).bindPopup("LycÃ©e Jean-Jacques Rousseau <br>BAC Pro, LycÃ©e<br><a href='aboutlyceerousseausarcelles.html'>Plus d'information</a>");
+
+
+
+
+var eat = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.994865541668474, 2.3806399512469816], {icon: eat}).addTo(map).bindPopup("Dolce Pizza <br>Pizza, Fast Food <br><a href='aboutdolcepizzasarcelles.html'>Plus d'information</a>");
+
+
+
+
+var shop = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.985844041542585, 2.373299802089682], {icon: shop}).addTo(map).bindPopup("My Place <br>Auchan, Foot Locker et magasin <br><a href='aboutmyplacesarcelles.html'>Plus d'information</a>");
+
+
+
+
+
+var shop = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87694508954776, 2.348511378437114], {icon: shop}).addTo(map).bindPopup("3D Informatique <br>RÃ©paration PC et vente <br><a href='about3dinformatiquegdnparis.html'>Plus d'information</a>");
+
+
+
+
+var samu = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88288586142109, 2.3531323809750972], {icon: samu}).addTo(map).bindPopup("Hopital Lariboisière <br>Soin et Traitement <br><a href='abouthopitallariboisieregdnparis.html'>Plus d'information</a>");
+
+
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.833761339573, 2.2652893901660085], {icon: entreprise}).addTo(map).bindPopup("Microsoft <br>Entreprise d'informatique <br><a href='aboutmicrosoftfranceparis.html'>Plus d'information</a>");
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83386617510749, 2.2600593896417336], {icon: entreprise}).addTo(map).bindPopup("TF1 <br>Télévision et vidéos <br><a href='abouttf1paris.html'>Plus d'information</a>");
+
+
+
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83222143361781, 2.2590918412022973], {icon: entreprise}).addTo(map).bindPopup("Huawei <br>TÃ©lÃ©phonie et Telecom <br><a href='abouthuaweifranceparis.html'>Plus d'information</a>");
+
+
+
+
+
+var goussrer = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82977849193181, 2.2637338083837784], {icon: goussrer}).addTo(map).bindPopup("Gare d'Issy-Val de Seine <br>RER C <br><a href='aboutissyvalseinererc.html'>Plus d'information</a>");
+
+
+
+
+
+
+var samu = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82818066837134, 2.2781196619331463], {icon: samu}).addTo(map).bindPopup("HÃ´pital Corentin Celton AP-HP <br>Soin et Traitement <br><a href='aboutsamucorentinceltonparis.html'>Plus d'information</a>");
+
+
+
+
+
+var samu = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83910026882979, 2.2752625335919783], {icon: samu}).addTo(map).bindPopup("HÃ´pital EuropÃ©en Georges Pompidou AP-HP <br>Soin et Traitement <br><a href='abouthopitalpompidouparis.html'>Plus d'information</a>");
+
+
+
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83646834164823, 2.2737129370121476], {icon: entreprise}).addTo(map).bindPopup("BFMTV <br>Télévision et journalisme <br><a href='aboutbfmtvparis.html'>Plus d'information</a>");
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83025353906517, 2.2613640062753113], {icon: entreprise}).addTo(map).bindPopup("Orange France <br>TÃ©lÃ©phonie et Telecom <br><a href='aboutorangefranceparis.html'>Plus d'information</a>");
+
+
+
+
+
+
+var sncf = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.91479819126085, 2.3494544194974867], {icon: sncf}).addTo(map).bindPopup("Technicentre SNCF TGV du Landy <br>Réparation de TGV <br><a href='abouttechsncftgvrerlandy.html'>Plus d'information</a>");
+
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83447148130574, 2.3732281957238857], {icon: entreprise}).addTo(map).bindPopup("SNCF Reseau <br>Transport <br><a href='aboutsncfreseauparis.html'>Plus d'information</a>");
+
+
+
+
+var tourisme = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85317969818507, 2.3500215894422696], {icon: tourisme}).addTo(map).bindPopup("CathÃ©drale Notre-Dame de Paris <br>CathÃ©drale, Touristique <br><a href='aboutnotredameparis.html'>Plus d'information</a>");
+
+
+
+
+var tourisme = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85860136595275, 2.294567344949801], {icon: tourisme}).addTo(map).bindPopup("Tour Eiffel <br>Touristique <br><a href='abouttoureiffelparis.html'>Plus d'information</a>");
+
+
+
+
+var tourisme = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87377405883765, 2.2949930358626385], {icon: tourisme}).addTo(map).bindPopup("Arc de Triomphe <br>Touristique, National FRANCE <br><a href='aboutarctriompheparis.html'>Plus d'information</a>");
+
+
+
+
+
+var tourisme = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86063732913352, 2.3376911388965578], {icon: tourisme}).addTo(map).bindPopup("MusÃ©e du Louvre <br>MusÃ©e, Touristique <br><a href='aboutmuseelouvreparis.html'>Plus d'information</a>");
+
+
+
+
+
+var tourisme2 = L.icon({
+    iconUrl: 'png-clipart-computer-icons-garden-others-miscellaneous-text-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.863413854926115, 2.3274886069632084], {icon: tourisme2}).addTo(map).bindPopup("Jardin des Tuileries <br>Jardin, Touristique <br><a href='aboutjardintuileriesparis.html'>Plus d'information</a>");
+
+
+
+
+
+var hyper = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10120285560826, 2.5286185402173547], {icon: hyper}).addTo(map).bindPopup("E.Leclerc LA CHAPELLE EN SERVAL <br>HypermarchÃ© <br><a href='aboutleclercfosseschapelleenserval.html'>Plus d'information</a>");
+
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.00980077287554, 2.5609726294223427], {icon: RERB}).addTo(map).bindPopup("Aéroport CDG 1 <br>RER B et BUS <br><a href='aboutchdegaullererbbus.html'>Plus d'information</a>");
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.9734358045742, 2.5142445237097757], {icon: RERB}).addTo(map).bindPopup("Parc des Expositions <br>RER B et BUS <br><a href='aboutparcdesexporerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.96290131616528, 2.5124370797800517], {icon: RERB}).addTo(map).bindPopup("Villepinte <br>RER B et BUS <br><a href='aboutvillepintererb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.94710317451246, 2.5243562276762113], {icon: RERB}).addTo(map).bindPopup("Sevran - Beaudottes <br>RER B et BUS <br><a href='aboutsevranrerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.93600981674922, 2.534387619221087], {icon: RERB}).addTo(map).bindPopup("Sevran-Livry <br>RER B et BUS <br><a href='aboutsevranlivryrerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.9320450009822, 2.4947755225005155], {icon: RERB}).addTo(map).bindPopup("Aulnay-Sous-Bois <br>RER B et BUS <br><a href='aboutaulnayrerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.932361025049296, 2.4765724223637458], {icon: RERB}).addTo(map).bindPopup("Le Blanc-Mesnil <br>RER B <br><a href='aboutblancmesnilrerb.html'>Plus d'information</a>");
+
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.932822208074604, 2.455077821551238], {icon: RERB}).addTo(map).bindPopup("Drancy <br>RER B et BUS <br><a href='aboutdrancyrerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.930925762651384, 2.425542782374978], {icon: RERB}).addTo(map).bindPopup("Le Bourget <br>RER B et BUS <br><a href='aboutbougetrerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.92421556763445, 2.385043819334178], {icon: RERB}).addTo(map).bindPopup("La Courneuve - Aubervilliers <br>RER B et BUS <br><a href='aboutcourneuvererb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.91816851047368, 2.3624629882054604], {icon: RERB}).addTo(map).bindPopup("La Plaine - Stade de France <br>RER B et BUS <br><a href='aboutstdefrancererb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.853505635012105, 2.345355106526512], {icon: RERB}).addTo(map).bindPopup("Saint-Michel Notre-Dame <br>RER B et Metro 4 <br><a href='stmichelnotredamererbmetro4.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84675205681236, 2.340388980145494], {icon: RERB}).addTo(map).bindPopup("Luxembourg <br>RER B <br><a href='aboutluxembourgrerb.html'>Plus d'information</a>");
+
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83998477169576, 2.3369537682872497], {icon: RERB}).addTo(map).bindPopup("Port-Royal <br>RER B <br><a href='aboutportroyalrerb.html'>Plus d'information</a>");
+
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83420219848137, 2.332791651924053], {icon: RERB}).addTo(map).bindPopup("Denfert-Rochereau <br>RER B et Metro 4, 6 <br><a href='aboutdenfertrerbmetro46.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82031744969231, 2.3389368043872354], {icon: RERB}).addTo(map).bindPopup("Cité Universitaire <br>RER B <br><a href='aboutciteunirerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.81508946136764, 2.340839425632722], {icon: RERB}).addTo(map).bindPopup("Gentilly <br>RER B <br><a href='aboutgentillyrerb.html'>Plus d'information</a>");
+
+
+
+
+var RERB = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.80782239027284, 2.3333494721961636], {icon: RERB}).addTo(map).bindPopup("Laplace <br>RER B <br><a href='aboutlaplacererb.html'>Plus d'information</a>");
+
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8438508285407, 2.3240331672681247], {icon: M4}).addTo(map).bindPopup("Montparnasse-BienvenÃ¼e <br>Gare Montparnasse, Metro 4, 6, 12, 13 et TGV <br><a href='aboutmontparnassemetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8421917166429, 2.3290089882329177], {icon: M4}).addTo(map).bindPopup("Vavin <br>Metro 4<br><a href='aboutvavinmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84679128464514, 2.3269245556558324], {icon: M4}).addTo(map).bindPopup("Saint-Placide <br>Metro 4<br><a href='aboutstplacidemetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85140690951162, 2.3309537895568937], {icon: M4}).addTo(map).bindPopup("Saint-Sulpice <br>Metro 4<br><a href='aboutstsulpicemetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.853610286120144, 2.3335720383541485], {icon: M4}).addTo(map).bindPopup("Saint-Germain-des-PrÃ©s <br>Metro 4<br><a href='aboutstgermainmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85226739684979, 2.3395018809512544], {icon: M4}).addTo(map).bindPopup("Odéon <br>Metro 4 et 10 <br><a href='aboutodeonmetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85372663372752, 2.344445158136093], {icon: M4}).addTo(map).bindPopup("Saint-Michel Notre-Dame <br>Metro 4 et RER B <br><a href='aboutmetronotredamererb.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85523342887757, 2.3469617622683216], {icon: M4}).addTo(map).bindPopup("Cité <br>Metro 4 <br><a href='aboutcitemetro4.html'>Plus d'information</a>");
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86378811653035, 2.349083394801486], {icon: M4}).addTo(map).bindPopup("Ã‰tienne Marcel <br>Metro 4 <br><a href='aboutetiennemarcelmetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86615767993235, 2.3524469338073946], {icon: M4}).addTo(map).bindPopup("RÃ©aumur - SÃ©bastopol <br>Metro 3 et 4 <br><a href='aboutsébastopolmetro3and4.html'>Plus d'information</a>");
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.869382299348054, 2.353711199417789], {icon: M4}).addTo(map).bindPopup("Strasbourg Saint-Denis <br>Metro 4, 8 et 9 <br><a href='aboutstarsstdenismetro.html'>Plus d'information</a>");
+
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.872379229733404, 2.3559416454470212], {icon: M4}).addTo(map).bindPopup("ChÃ¢teau d'Eau <br>Metro 4 <br><a href='aboutchateaudeaumetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87672519380788, 2.357742643072331], {icon: M4}).addTo(map).bindPopup("Gare de l'Est <br>Metro 4 <br><a href='aboutgaredelestmetro4paris.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.880300810729516, 2.3539557272581932], {icon: M4}).addTo(map).bindPopup("Gare du Nord <br>Metro 4 <br><a href='aboutgdnmetro4.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8837499234592, 2.3499624534947468], {icon: M4}).addTo(map).bindPopup("Barbès - Rochechouart <br>Metro 2 et 4 <br><a href='aboutbarbesmetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.887162755006685, 2.349713426862842], {icon: M4}).addTo(map).bindPopup("Chateau Rouge <br>Metro 4 <br><a href='aboutchateaurougemetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89152695441295, 2.3497632132181683], {icon: M4}).addTo(map).bindPopup("Marcadet â€“ Poissonniers <br>Metro 4 et 12 <br><a href='aboutmarcadetmetro.html'>Plus d'information</a>");
+
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89399072708138, 2.347800016934989], {icon: M4}).addTo(map).bindPopup("Simplon <br>Metro 4 et 12 <br><a href='aboutsimplonmetro.html'>Plus d'information</a>");
+
+
+
+
+var M4 = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8977145560369, 2.3446671458178328], {icon: M4}).addTo(map).bindPopup("Porte de Clignancourt <br>Metro 4 <br><a href='aboutportecligancourtmetro.html'>Plus d'information</a>");
+
+
+
+
+
+
+var eat = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.08821115339951, 2.5539935142942864], {icon: eat}).addTo(map).bindPopup("McDonald's Saint Witz <br>FastFood et Burger<br><a href='aboutmcdostwitz.html'>Plus d'information</a>");
+
+
+
+
+var eat = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.08819083472183, 2.555308929667035], {icon: eat}).addTo(map).bindPopup("Buffalo Grill Saint Witz <br>Restaurant <br><a href='aboutbuffalostwitz.html'>Plus d'information</a>");
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09487988498778, 2.5075690099352417], {icon: bus}).addTo(map).bindPopup("Rue des Violettes <br>Arret de BUS, BUS R2 <br><a href='aboutbusr2fosses.html'>Plus d'information</a>");
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09487893896524, 2.5065240334914174], {icon: bus}).addTo(map).bindPopup("Rue des Violettes <br>Arret de BUS, BUS R2 <br><a href='aboutbusr2fosses.html'>Plus d'information</a>");
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09538660192696, 2.5114976376734086], {icon: bus}).addTo(map).bindPopup("AllÃ©e de La Source <br>Arret de BUS, BUS R2 et R112 <br><a href='aboutbusr2fosses.html'>Plus d'information</a>");
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09707572864333, 2.5176341282941515], {icon: bus}).addTo(map).bindPopup("Coteau de La Gare <br>Arret de BUS, BUS R2 et R112 <br><a href='aboutbusr2fosses.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// en dessous les nouveaux point et marqueur
+
+
+
+
+
+var ecole = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10360795067163, 2.51075379261088], {icon: ecole}).addTo(map).bindPopup("CollÃ¨ge Stendhal <br>CollÃ¨ge et Brevet <br><a href='aboutstendhal.html'>Plus d'information</a>");
+
+
+
+var germinal = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09783308121065, 2.5170052275943147], {icon: germinal}).addTo(map).bindPopup("Espace Germinal <br>Spectacle <br><a href='aboutgerminal.html'>Plus d'information</a>");
+
+
+
+var ecole = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.101470476755715, 2.5044241119447914], {icon: ecole}).addTo(map).bindPopup("LycÃ©e Polyvalent Charles Baudelaire <br>LycÃ©e et BAC <br><a href='aboutbaudfosses.html'>Plus d'information</a>");
+
+
+
+var fosrest = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.099886925253095, 2.5197304331244235], {icon: fosrest}).addTo(map).bindPopup("Restaurant Le Lysieux <br>Restauration <br><a href='aboutrestaulysieux.html'>Plus d'information</a>");
+
+
+var fosrest = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09965263959612, 2.523008497980171], {icon: fosrest}).addTo(map).bindPopup("Boucherie de la Gare- Fosses <br>Viandes et Barbecues <br><a href='aboutboucfosses.html'>Plus d'information</a>");
+
+
+var fosrest = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09903007379013, 2.5217981120124815], {icon: fosrest}).addTo(map).bindPopup("C PIZZA AU FEU DE BOIS Fosses <br>Pizza et Restauration rapide <br><a href='aboutpizza2fosses.html'>Plus d'information</a>");
+
+
+
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09667232825678, 2.5210965906289555], {icon: entreprise}).addTo(map).bindPopup("Desson Groupe <br>Impression et Vente <br><a href='aboutdexxonfosses.html'>Plus d'information</a>");
+
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09506356391088, 2.5193478150810833], {icon: entreprise}).addTo(map).bindPopup("SeD Logistique <br>Logistique et Transport <br><a href='aboutsedlogistiquefosses.html'>Plus d'information</a>");
+
+
+var shop = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09282991378929, 2.5291709716824182], {icon: shop}).addTo(map).bindPopup("Brico DÃ©pÃ´t <br>Magasin de Bricolage <br><a href='aboutbricodepotfosses.html'>Plus d'information</a>");
+
+
+
+var shop = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.099511037683286, 2.52805573920091], {icon: shop}).addTo(map).bindPopup("Point.P - Fosses <br>Magasin de Bricolage <br><a href='aboutpointpfosses.html'>Plus d'information</a>");
+
+
+
+var mairie = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09867449122813, 2.5165144470053455], {icon: mairie}).addTo(map).bindPopup("Mairie de Fosses <br>Renseignement et Mairie <br><a href='aboutmairiefosses.html'>Plus d'information</a>");
+
+
+
+
+var parc = L.icon({
+    iconUrl: 'png-clipart-computer-icons-garden-others-miscellaneous-text-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.093056223826395, 2.5004113177791853], {icon: parc}).addTo(map).bindPopup("Parc Salvador Allende <br>Parc et Lac <br><a href='aboutparcallendefosses.html'>Plus d'information</a>");
+
+
+
+
+var hopital = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.99114946172731, 2.450287793843975], {icon: hopital}).addTo(map).bindPopup("Centre Hospitalier de Gonesse <br>Centre Hopital <br><a href='aboutgonessehopital.html'>Plus d'information</a>");
+
+
+
+
+
+var entreprise = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.991273476166285, 2.4576111069728204], {icon: entreprise}).addTo(map).bindPopup("Heppner Gonesse <br>Logistique et Transport <br><a href='aboutgonesseheppner.html'>Plus d'information</a>");
+
+
+
+var shop = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02099722408184, 2.456768062765927], {icon: shop}).addTo(map).bindPopup("Carrefour Goussainville <br>Hyper MarchÃ© <br><a href='aboutcarrefourgouss.html'>Plus d'information</a>");
+
+
+
+var ecole = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.03261559129707, 2.455112734293792], {icon: ecole}).addTo(map).bindPopup("CollÃ¨ge Maximilien de Robespierre <br>CollÃ¨ge et Brevet <br><a href='aboutcollege2gouss.html'>Plus d'information</a>");
+
+
+
+var ecole = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.03242000839349, 2.4734854690518833], {icon: ecole}).addTo(map).bindPopup("Mairie de Goussainville <br>Renseignement et Mairie <br><a href='aboutmairiegouss.html'>Plus d'information</a>");
+
+
+var shop = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.948222370511324, 2.3444806361031296], {icon: shop}).addTo(map).bindPopup("Brico DÃ©pÃ´t <br>Magasin de Bricolage <br><a href='aboutbricodepotvilletaneuse.html'>Plus d'information</a>");
+
+
+
+var parc = L.icon({
+    iconUrl: 'png-clipart-computer-icons-garden-others-miscellaneous-text-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82606769801956, 2.2559963453909027], {icon: parc}).addTo(map).bindPopup("Parc de l'Ã®le Saint-Germain <br>Parc sur Ile <br><a href='aboutparc4paris.html'>Plus d'information</a>");
+
+
+
+var mcdo = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8341111963681, 2.242990527015158], {icon: mcdo}).addTo(map).bindPopup("McDonald's Boullogne Billancourt <br>Burger et Fast Food <br><a href='aboutmcdoboullogne.html'>Plus d'information</a>");
+
+//NOUVEAU
+
+var latourelle = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.99315737728103, 2.38309209048097], {icon: latourelle}).addTo(map).bindPopup("FastFood LaTourelle<br>Burger et Fast Food <br><a href='aboutfasttourelle.html'>Plus d'information</a>");
+
+
+
+var latourelle = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.994820021067255, 2.380692304571648], {icon: latourelle}).addTo(map).bindPopup("Chez Massimo<br>Kebab et Fast Food <br><a href='aboutchezmassimo.html'>Plus d'information</a>");
+
+
+
+var pharmacie = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.99459227863621, 2.3786557515752857], {icon: pharmacie}).addTo(map).bindPopup("Pharmacie Centrale de Sarcelles<br>MÃ©dicament et Carte Vitale <br><a href='aboutpharsar95.html'>Plus d'information</a>");
+
+
+
+var police = L.icon({
+    iconUrl: 'police.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.97772699162737, 2.369504877368448], {icon: police}).addTo(map).bindPopup("Police <br>Plainte et GAV <br><a href='aboutfdosar.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+
+
+
+var latourelle = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.035632854541454, 4.070958966215277], {icon: latourelle}).addTo(map).bindPopup("McDonald's Roanne<br>Burger et Fast Food <br><a href='aboutmcdoroanne.html'>Plus d'information</a>");
+
+
+
+
+
+var mairie = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03442714325422, 4.072765314959565], {icon: mairie}).addTo(map).bindPopup("Mairie de Roanne<br>Mairie et Info <br><a href='aboutmairieroanne.html'>Plus d'information</a>");
+
+
+
+
+
+var fnacroanne = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03623260936184, 4.070563492548408], {icon: fnacroanne}).addTo(map).bindPopup("FNAC Roanne<br>Informatique et Musique <br><a href='aboutfnacroanne.html'>Plus d'information</a>");
+
+
+
+var mairie = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03396402804466, 4.0735613557970485], {icon: mairie}).addTo(map).bindPopup("ThÃ©Ã¢tre Municipal<br>Salle de Spectacle <br><a href='abouttheatreroanne.html'>Plus d'information</a>");
+
+
+
+
+var samu = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03549919084603, 4.071675506861273], {icon: samu}).addTo(map).bindPopup("Pharmacie des Dames<br>Soins et SantÃ© <br><a href='aboutsamuroanne.html'>Plus d'information</a>");
+
+
+
+
+var bouygueroanne = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03628884787397, 4.070819407933754], {icon: bouygueroanne}).addTo(map).bindPopup("Bouygue Telecom<br>Telecom et Mobile <br><a href='aboutbyouroanne.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+
+var lycee1roanne = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.037806387593754, 4.069660468493395], {icon: lycee1roanne}).addTo(map).bindPopup("LycÃ©e Jean Puy<br>Enseignement secondaire <br><a href='aboutlycee1roanne.html'>Plus d'information</a>");
+
+
+
+
+
+var gareroanne = L.icon({
+    iconUrl: 'Paris_transit_icons_-_Train.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03973736959004, 4.062573139372883], {icon: gareroanne}).addTo(map).bindPopup("Gare de Roanne<br>SNCF TER et IntercitÃ©<br><a href='aboutsncfroanne.html'>Plus d'information</a>");
+
+
+var samuroanne = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.04279924143687, 4.078221940696051], {icon: samuroanne}).addTo(map).bindPopup("Centre Hospitalier de Roanne<br>Soins et SantÃ©<br><a href='abouthopitalroanne.html'>Plus d'information</a>");
+
+
+
+var lycee2roanne = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.04368851200673, 4.0723747666502605], {icon: lycee2roanne}).addTo(map).bindPopup("Campus de Roanne - UniversitÃ© Jean Monnet<br>UniversitÃ© <br><a href='aboutlycee1roanne.html'>Plus d'information</a>");
+
+
+
+
+var tacosroanne = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.04177100217307, 4.0727892239366605], {icon: tacosroanne}).addTo(map).bindPopup("Oâ€™tacos Roanne<br>Burger et Fast Food <br><a href='abouttacosroanne.html'>Plus d'information</a>");
+
+
+
+
+var cinema = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03712448147179, 4.06465008825619], {icon: cinema}).addTo(map).bindPopup("CinÃ©ma Multiplexe le Grand Palais<br><a href='aboutcinemaroanne.html'>Plus d'information</a>");
+
+
+
+var subwayroanne = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.0374450870777, 4.064413535060778], {icon: subwayroanne}).addTo(map).bindPopup("Subway Roanne<br>Burger et Fast Food <br><a href='aboutsubwayroanne.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+var ldlcroanne = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03804563383711, 4.064066589311799], {icon: ldlcroanne}).addTo(map).bindPopup("LDLC Roanne<br>Informatique et PC <br><a href='aboutldlcroanne.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var info = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.04035434336584, 4.061958119632343], {icon: info}).addTo(map).bindPopup("Ceci est un marqueur pour vous prÃ©venir<br>que nous avons pas finit d'indexer Roanne");
+
+
+
+var fedexfosses = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09156222609784, 2.5220277834773523], {icon: fedexfosses}).addTo(map).bindPopup("FedEx Express<br>Logistique et Transport <br><a href='aboutfedexfosses.html'>Plus d'information</a>");
+
+
+var gefcofosses = L.icon({
+    iconUrl: 'hhh.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09114772887735, 2.519367042954229], {icon: gefcofosses}).addTo(map).bindPopup("Gefco Marly-la-Ville<br>Logistique<br><a href='aboutgefcofosses.html'>Plus d'information</a>");
+
+
+
+
+var drivelecfosses = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09107739276606, 2.5275292154150755], {icon: drivelecfosses}).addTo(map).bindPopup("E.Leclerc DRIVE Saint-Witz<br>Supermarché en drive<br><a href='aboutdrivelecfosses.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+
+
+
+
+var gustopizza = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09521732865854, 2.5096592912597986], {icon: gustopizza}).addTo(map).bindPopup("Gusto Pizza<br>Pizzeria<br><a href='aboutgustopizzafosses.html'>Plus d'information</a>");
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.094430949311516, 2.5022348515469144], {icon: bus}).addTo(map).bindPopup(" Poteau de Marly<br>BUS R2, R1, R117<br><a href='aboutpoteaubusfosses.html'>Plus d'information</a>");
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09379590476062, 2.503131507641256], {icon: bus}).addTo(map).bindPopup(" Poteau de Marly<br>BUS R2, R1, R117<br><a href='aboutpoteaubusfosses.html'>Plus d'information</a>");
+
+
+
+var ferme = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10345565264318, 2.5149182357020807], {icon: ferme}).addTo(map).bindPopup(" La ferme de Basile<br>Magasin de produits de la ferme<br><a href='aboutfermebasilefosses.html'>Plus d'information</a>");
+
+
+
+var ferme = L.icon({
+    iconUrl: 'police.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09892348476525, 2.5126150514377876], {icon: ferme}).addTo(map).bindPopup("Gendarmerie Nationale<br>Police et GAV<br><a href='aboutpolicefosses.html'>Plus d'information</a>");
+
+
+
+var telfosses = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.100821432217195, 2.5113892758132215], {icon: telfosses}).addTo(map).bindPopup("Réparation Téléphone Fosses - MiPhone Center<br>Réparation et Téléphonie<br><a href='aboutmiphonefosses.html'>Plus d'information</a>");
+
+
+
+
+var mosqueegouss = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.03269131286635, 2.458123274949208], {icon: mosqueegouss}).addTo(map).bindPopup("Mosquée de Goussainville<br>Mosquée<br><a href='aboutmosqueegoussainville.html'>Plus d'information</a>");
+
+
+
+
+var tennisgouss = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02736772165437, 2.4583815642716904], {icon: tennisgouss}).addTo(map).bindPopup("Tennis Club Municipal de Goussainville<br>Club de Tennis<br><a href='abouttennisgoussainville.html'>Plus d'information</a>");
+
+
+
+var restaurantgouss = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02023502159428, 2.4660455126457554], {icon: restaurantgouss}).addTo(map).bindPopup("McDonald's<br>Restauration rapide<br><a href='aboutmcdogoussainville.html'>Plus d'information</a>");
+
+
+var restaurantgouss = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02042144941337, 2.4650950232480247], {icon: restaurantgouss}).addTo(map).bindPopup("KFC Goussainville<br>Restauration rapide<br><a href='aboutkfcgoussainville.html'>Plus d'information</a>");
+
+
+
+var grandfraisgouss = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02073510559757, 2.467741386984849], {icon: grandfraisgouss}).addTo(map).bindPopup("Grand Frais Goussainville<br>Supermarché<br><a href='aboutgrandfraisgoussainville.html'>Plus d'information</a>");
+
+
+
+var grandfraisgouss = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.022322166803335, 2.465966993410446], {icon: grandfraisgouss}).addTo(map).bindPopup("ALDI<br>Supermarché<br><a href='aboutaldigoussainville.html'>Plus d'information</a>");
+
+
+
+
+var grandfraisgouss = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02292457288895, 2.464665583460363], {icon: grandfraisgouss}).addTo(map).bindPopup("Lidl<br>Supermarché<br><a href='aboutlidlgoussainville.html'>Plus d'information</a>");
+
+
+
+
+var totalgouss = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.01559163434247, 2.470310060789484], {icon: totalgouss}).addTo(map).bindPopup("TotalEnergies<br>Station-service<br><a href='abouttotalgoussainville.html'>Plus d'information</a>");
+
+
+
+
+
+var busgouss = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02563304947829, 2.4630732332271865], {icon: busgouss}).addTo(map).bindPopup("Sécurité Sociale<br>BUS 11, 32A, R104<br><a href='aboutsecubusgoussainville.html'>Plus d'information</a>");
+
+
+
+var busgouss = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02802576776779, 2.461548361604736], {icon: busgouss}).addTo(map).bindPopup("Marché<br>BUS 11, 32A, 32<br><a href='aboutmarchebusgoussainville.html'>Plus d'information</a>");
+
+
+
+
+var busgouss = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.03024925333557, 2.4599248632191646], {icon: busgouss}).addTo(map).bindPopup("Centre de Secours<br>BUS 11, 32A, 32 et 30B<br><a href='aboutcentredesecoursbusgoussainville.html'>Plus d'information</a>");
+
+
+
+
+var busgouss = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.032393056973824, 2.459477251648973], {icon: busgouss}).addTo(map).bindPopup("Espérance<br>BUS 30B<br><a href='aboutesperancebusgoussainville.html'>Plus d'information</a>");
+
+
+
+
+var busgouss = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.03309187716572, 2.4582287547990647], {icon: busgouss}).addTo(map).bindPopup("Avenue des Tilleuls<br>BUS 11, 32A, 32 et 30B<br><a href='abouttilleulsbusgoussainville.html'>Plus d'information</a>");
+
+
+
+
+var ecolegouss = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.03810490503736, 2.4689634585132616], {icon: ecolegouss}).addTo(map).bindPopup("École maternelle Gabriel Péri<br>École maternelle<br><a href='aboutgabrielperiecolegoussainville.html'>Plus d'information</a>");
+
+
+
+
+var busgouss = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.038071535309435, 2.4679372650305473], {icon: busgouss}).addTo(map).bindPopup("Ecole Gabriel Péri<br>BUS 11, 32A, 32 et R104<br><a href='aboutgabrielperibusgoussainville.html'>Plus d'information</a>");
+
+
+
+var ecolegouss = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.02681755328519, 2.473916462228898], {icon: ecolegouss}).addTo(map).bindPopup("École Louis Pasteur<br>École primaire<br><a href='aboutlouispasteurecolegoussainville.html'>Plus d'information</a>");
+
+
+
+var tu144gouss = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.024511717078745, 2.4726759708156356], {icon: tu144gouss}).addTo(map).bindPopup("Mémorial de l'accident du Tupolev 144<br>Monument, Crash d'avion<br><a href='abouttu144goussainville.html'>Plus d'information</a>");
+
+
+
+
+// new of bite
+
+
+
+var cinemaroanne = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.038166076083215, 4.069182204901497], {icon: cinemaroanne}).addTo(map).bindPopup("Cinéma Espace Renoir<br>Spectacle, cinéma <br><a href='aboutcineroanne.html'>Plus d'information</a>");
+
+
+
+var centralroanne = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.03965428714048, 4.063697402160904], {icon: centralroanne}).addTo(map).bindPopup("Le Central<br>Restauration <br><a href='aboutcentralresroanne.html'>Plus d'information</a>");
+
+
+
+var barroanne = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.040775238248116, 4.064218370738924], {icon: barroanne}).addTo(map).bindPopup("Di Bartoloméo<br>Magasin de matériel artistique <br><a href='aboutdibartoroanne.html'>Plus d'information</a>");
+
+
+var doncamiroanne = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([46.04302221907098, 4.066700566369329], {icon: doncamiroanne}).addTo(map).bindPopup("Don Camillo<br>Restauration <br><a href='aboutdoncamilloroanne.html'>Plus d'information</a>");
+
+//paris
+
+var grevin = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.871811802944826, 2.342201977416825], {icon: grevin}).addTo(map).bindPopup("Musée Grévin<br>Musée <br><a href='aboutgrevinparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.872002590343904, 2.339382234032665], {icon: metro}).addTo(map).bindPopup("Richelieu - Drouot <br>Metro 8 et 9 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.871356570425014, 2.3434779973427715], {icon: metro}).addTo(map).bindPopup("Grands Boulevards <br>Metro 8 et 9 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.870840506546905, 2.3470270836729137], {icon: metro}).addTo(map).bindPopup("Bonne Nouvelle <br>Metro 8 et 9 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86870422753029, 2.3418484446355516], {icon: metro}).addTo(map).bindPopup("Bourse <br>Metro 3 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.869629797736074, 2.3359481265976783], {icon: metro}).addTo(map).bindPopup("Quatre-Septembre <br>Metro 3 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86743423768685, 2.3470089310759503], {icon: metro}).addTo(map).bindPopup("Sentier <br>Metro 3 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87021613475117, 2.3254366452364623], {icon: metro}).addTo(map).bindPopup("Madeleine <br>Metro 8, 12 et 14 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.876135181994236, 2.3385467641960758], {icon: metro}).addTo(map).bindPopup("Notre-Dame-de-Lorette <br>Metro 12 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87866830412639, 2.3373343734274705], {icon: metro}).addTo(map).bindPopup("Saint-Georges <br>Metro 12 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.882379546111245, 2.3373236440102247], {icon: metro}).addTo(map).bindPopup("Pigalle <br>Metro 2 et 12 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88366057179543, 2.3328770813227053], {icon: metro}).addTo(map).bindPopup("Blanche <br>Metro 2 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8835195114758, 2.3275555806139696], {icon: metro}).addTo(map).bindPopup("Place de Clichy <br>Metro 2 et 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88224248850704, 2.3211934025624994], {icon: metro}).addTo(map).bindPopup("Rome <br>Metro 2 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88131841642868, 2.31549742793325], {icon: metro}).addTo(map).bindPopup("Villiers <br>Metro 2 et 3 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88040824944086, 2.3089099501715857], {icon: metro}).addTo(map).bindPopup("Monceau <br>Metro 2 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87914718465235, 2.3032169663431676], {icon: metro}).addTo(map).bindPopup("Courcelles <br>Metro 2 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87834989399043, 2.29895764195695], {icon: metro}).addTo(map).bindPopup("Ternes <br>Metro 2 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86991663463755, 2.2855657548684634], {icon: metro}).addTo(map).bindPopup("Victor Hugo <br>Metro 2 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87174435969448, 2.2764355113566914], {icon: metro}).addTo(map).bindPopup("Porte Dauphine <br>Metro 2 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87374234911289, 2.295339788941476], {icon: metro}).addTo(map).bindPopup("Charles de Gaulle – Étoile <br>Metro 1, 2 et 6 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var rera = L.icon({
+    iconUrl: 'ggg.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.873445968244305, 2.296133708618326], {icon: rera}).addTo(map).bindPopup("Charles de Gaulle – Étoile <br>RER A <br><a href='aboutrerparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.875464122925386, 2.2893316454085837], {icon: metro}).addTo(map).bindPopup("Argentine <br>Metro 1 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+//guidel
+
+
+
+
+
+var guidelsuperu = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([47.78593353478939, -3.49027497769764], {icon: guidelsuperu}).addTo(map).bindPopup("Super U et Drive - Guidel <br>Supermarché <br><a href='aboutsuperuguidel.html'>Plus d'information</a>");
+
+
+var guidelmoules = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([47.766911451107184, -3.5248876846917874], {icon: guidelmoules}).addTo(map).bindPopup("La moule qui saoule <br>Restaurant <br><a href='aboutmoulequisaouleguidel.html'>Plus d'information</a>");
+
+
+
+
+var guidelmoules = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([47.77206780421553, -3.526572395503849], {icon: guidelmoules}).addTo(map).bindPopup("Ty Beach <br>Restaurant <br><a href='abouttybeachguidel.html'>Plus d'information</a>");
+
+
+
+var guidelmoules = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([47.772008121999036, -3.5269393049111994], {icon: guidelmoules}).addTo(map).bindPopup("La Villa <br>Restaurant <br><a href='aboutlavillaguidel.html'>Plus d'information</a>");
+
+
+
+
+var guidelsuperu = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([47.771728185720995, -3.526061223336818], {icon: guidelsuperu}).addTo(map).bindPopup("Carrefour Express <br>Supermarché <br><a href='aboutcarrexguidel.html'>Plus d'information</a>");
+
+
+
+
+
+var grevin = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([47.77252559578786, -3.52896143466986], {icon: grevin}).addTo(map).bindPopup("Port de Plaisance de Guidel <br>Port <br><a href='aboutportguidel.html'>Plus d'information</a>");
+
+
+
+
+
+
+//new of mios metro
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.946199404491374, 2.3644123758393882], {icon: metro}).addTo(map).bindPopup("St-Denis Universite <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.937202519733916, 2.3597621101640254], {icon: metro}).addTo(map).bindPopup("Basilique de Saint-Denis <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.92981504087491, 2.356217346463129], {icon: metro}).addTo(map).bindPopup("Saint-Denis Porte de Paris <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.91955942218051, 2.3431479152145], {icon: metro}).addTo(map).bindPopup("Carrefour Pleyel <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.91231549174328, 2.334005274297548], {icon: metro}).addTo(map).bindPopup("Mairie de Saint-Ouen <br>Metro 13 et 14 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.90600987599069, 2.3319234244366975], {icon: metro}).addTo(map).bindPopup("Garibaldi <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89278383408219, 2.327353678405564], {icon: metro}).addTo(map).bindPopup("Guy Môquet <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88757966519846, 2.325531073576509], {icon: metro}).addTo(map).bindPopup("La Fourche <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.879611549962995, 2.3269002667456333], {icon: metro}).addTo(map).bindPopup("Liège <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86763030711726, 2.3136375886813476], {icon: metro}).addTo(map).bindPopup("Champs-Élysées - Clemenceau <br>Metro 1 et 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86203083974019, 2.3145348707633957], {icon: metro}).addTo(map).bindPopup("Invalides <br>Metro 8 et 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85677114016891, 2.315048002961782], {icon: metro}).addTo(map).bindPopup("Varenne <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85121289632964, 2.314263424569088], {icon: metro}).addTo(map).bindPopup("Saint-François-Xavier <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84702394982352, 2.3163148310719563], {icon: metro}).addTo(map).bindPopup("Duroc <br>Metro 10 et 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.838022151307186, 2.322651056930808], {icon: metro}).addTo(map).bindPopup("Gaîté - Joséphine Baker <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.833887627443595, 2.3179851563272234], {icon: metro}).addTo(map).bindPopup("Pernety <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83175034364897, 2.313966967086201], {icon: metro}).addTo(map).bindPopup("Plaisance <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82745193605453, 2.3057690235013664], {icon: metro}).addTo(map).bindPopup("Porte de Vanves <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82247992657972, 2.2984501149793206], {icon: metro}).addTo(map).bindPopup("Malakoff - Plateau de Vanves <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.815174462317714, 2.2973261854206157], {icon: metro}).addTo(map).bindPopup("Malakoff – Rue Étienne Dolet <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.81079460944178, 2.3017192262383603], {icon: metro}).addTo(map).bindPopup("Châtillon-Montrouge <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>")
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89042602131932, 2.3202220126600133], {icon: metro}).addTo(map).bindPopup("Brochant <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>")
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.894412992740264, 2.3136907848820223], {icon: metro}).addTo(map).bindPopup("Porte de Clichy <br>Metro 13 et 14 <br><a href='aboutmetroparis.html'>Plus d'information</a>")
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.91633566453208, 2.294771089381943], {icon: metro}).addTo(map).bindPopup("Gabriel Péri <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>")
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.923170323771906, 2.286245806984484], {icon: metro}).addTo(map).bindPopup("Les Agnettes <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>")
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.930204565916824, 2.2842172335989814], {icon: metro}).addTo(map).bindPopup("Asnières - Gennevilliers Les Courtilles <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>")
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.90323055409336, 2.305676531390174], {icon: metro}).addTo(map).bindPopup("Mairie de Clichy <br>Metro 13 <br><a href='aboutmetroparis.html'>Plus d'information</a>")
+
+
+
+
+
+
+var lidl = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.815005647353864, 2.2776891901374405], {icon: lidl}).addTo(map).bindPopup("Lidl <br>Supermarché <br><a href='aboutlidlclamart.html'>Plus d'information</a>")
+
+
+
+
+
+var lidl = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82045815517715, 2.2513640325976496], {icon: lidl}).addTo(map).bindPopup("Action Issy Les Moulineaux <br>Supermarché, Epicerie <br><a href='aboutactionissylesmouli.html'>Plus d'information</a>")
+
+
+//NEW HUNTER X HUNTER IS A BEST ANIME GOAT
+
+
+var cosec = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09843505105159, 2.5034194111998214], {icon: cosec}).addTo(map).bindPopup("COSEC <br>Sale de Gym <br><a href='aboutcosecfosses.html'>Plus d'information</a>")
+
+
+
+var fossesdead = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09822826347154, 2.4897358060441372], {icon: fossesdead}).addTo(map).bindPopup("Cimetière <br>Cimetière <br><a href='aboutcimetierefosses.html'>Plus d'information</a>")
+
+
+
+
+var ecolealex = L.icon({
+    iconUrl: 'bat_ecole.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09606142166696, 2.4883423865485255], {icon: ecolealex}).addTo(map).bindPopup("École Alexandre Dumas <br>Ecole primaire <br><a href='aboutecolealexfosses.html'>Plus d'information</a>")
+
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88806906153608, 2.353384673651565], {icon: restsenebou}).addTo(map).bindPopup("Restaurant sénégalais - Balie Bousso <br>Restaurant Africain <br><a href='aboutrestsenebouparis.html'>Plus d'information</a>")
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88759206394741, 2.3535890089247244], {icon: restsenebou}).addTo(map).bindPopup("Les Trois Frères <br>Restaurant <br><a href='abouttroisfreresrestparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8879503865644, 2.3536375319261293], {icon: restsenebou}).addTo(map).bindPopup("Olympic Café <br>Bar avec Musique <br><a href='aboutolymcafeparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88756544159141, 2.352346763607355], {icon: restsenebou}).addTo(map).bindPopup("Navel <br>Restaurant indien <br><a href='aboutnavelrestparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88933957432858, 2.3498897518609665], {icon: restsenebou}).addTo(map).bindPopup("Chicken Spot Barbès <br>Restaurant <br><a href='aboutchikspotbarbesparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.890164927355485, 2.348682752461745], {icon: restsenebou}).addTo(map).bindPopup("Traiteur Xiang Rui <br>Plats chinois à emporter <br><a href='aboutxiangruirestparis.html'>Plus d'information</a>")
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.890602532040674, 2.3453528906357897], {icon: restsenebou}).addTo(map).bindPopup("GEMÜSE - Berliner Kebap <br>Kebab <br><a href='aboutgemusegrecparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.889398894867064, 2.3439911826915427], {icon: restsenebou}).addTo(map).bindPopup("Il Padrino <br>Restaurant italien <br><a href='aboutpadrinorestparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88674334049086, 2.34704933545891], {icon: restsenebou}).addTo(map).bindPopup("La Porteña <br>Restaurant argentin <br><a href='aboutportenarestparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88849066816687, 2.347105932772956], {icon: restsenebou}).addTo(map).bindPopup("Sucré Cœur <br>Pâtisserie <br><a href='aboutsucrecoeurparis.html'>Plus d'information</a>")
+
+
+
+
+var bricocustine = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.889131314086235, 2.345772349304423], {icon: bricocustine}).addTo(map).bindPopup("Bricocustine <br>Quincaillerie <br><a href='aboutbricocustineparis.html'>Plus d'information</a>")
+
+
+
+var Promoprint = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89017893034077, 2.3467057911220954], {icon: Promoprint}).addTo(map).bindPopup("Promoprint <br>Imprimeur <br><a href='aboutpromoprintparis.html'>Plus d'information</a>")
+
+
+
+
+var smur = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88932711829318, 2.345402240641156], {icon: smur}).addTo(map).bindPopup("Gynea Cabinet Médical Santé de la Femme <br>Centre médical <br><a href='aboutsamugyneaparis.html'>Plus d'information</a>")
+
+
+
+var tourist = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.886716719772195, 2.34309006810469], {icon: tourist}).addTo(map).bindPopup("Basilique du Sacré-Cœur de Montmartre <br>Basilique <br><a href='aboutsacrecoeurparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.886818214803256, 2.344496010809612], {icon: restsenebou}).addTo(map).bindPopup("LouLou Montmartre <br>Restaurant <br><a href='aboutlouloumontmartreparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87912983389324, 2.354589143829519], {icon: restsenebou}).addTo(map).bindPopup("Carton Paris <br>Boulangerie <br><a href='aboutcartonparisgdnparis.html'>Plus d'information</a>")
+
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87981537888148, 2.354249902581179], {icon: restsenebou}).addTo(map).bindPopup("Burger King <br>Fast Food <br><a href='aboutburgerkinggdnparis.html'>Plus d'information</a>")
+
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.877126343851096, 2.348228651326755], {icon: restsenebou}).addTo(map).bindPopup("Silo <br>Restaurant <br><a href='aboutsilofayetteparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.876704739655395, 2.347622470045117], {icon: restsenebou}).addTo(map).bindPopup("Le Montholon <br>Restaurant <br><a href='aboutmontholonfayetteparis.html'>Plus d'information</a>")
+
+
+
+
+var indianmarketparisgdn = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88072004494058, 2.3579456310172655], {icon: indianmarketparisgdn}).addTo(map).bindPopup("INDIAN SUPER MARKET <br>Supermarché <br><a href='aboutidnsupermarketgdnparis.html'>Plus d'information</a>")
+
+
+
+
+var indianmarketparisgdn = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.878993506745225, 2.356195382586891], {icon: indianmarketparisgdn}).addTo(map).bindPopup("Carrefour City <br>Supermarché <br><a href='aboutcarrefourcitygdnparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87871611692152, 2.355104165446778], {icon: restsenebou}).addTo(map).bindPopup("O'Tacos <br>Fast Food <br><a href='aboutotacosgdnparis.html'>Plus d'information</a>")
+
+
+
+var shopparisgdn = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87755200192054, 2.3509780105403526], {icon: shopparisgdn}).addTo(map).bindPopup("NEGATIF+ Argentique <br>Laboratoire photo <br><a href='aboutnegatifplusgdnparis.html'>Plus d'information</a>")
+
+
+
+var shopparisgdn = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87850430262308, 2.3508336661307925], {icon: shopparisgdn}).addTo(map).bindPopup("ALICE DUPRAZ-TOULOUSE | Paris <br>Boutique de mariage <br><a href='aboutaliceduprazgdnparis.html'>Plus d'information</a>")
+
+
+
+
+var shopparisgdn = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88355196956434, 2.3510968411725783], {icon: shopparisgdn}).addTo(map).bindPopup("Guerrisol <br>Friperie <br><a href='aboutguerrisolgdnparis.html'>Plus d'information</a>")
+
+
+
+var indianmarketparisgdn = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88516907756169, 2.359545418046462], {icon: indianmarketparisgdn}).addTo(map).bindPopup("Carrefour City <br>Supermarché <br><a href='aboutcarrefourcity2gdnparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.881456635176804, 2.3450275731408263], {icon: restsenebou}).addTo(map).bindPopup("Boulangerie Léonie <br>Boulangerie <br><a href='aboutboulangerieleoniegdnparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8809726794751, 2.3465448493433563], {icon: restsenebou}).addTo(map).bindPopup("Tranché Rochechouart - Boulangerie engagée <br>Boulangerie <br><a href='abouttrancherochegdnparis.html'>Plus d'information</a>")
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87995991444763, 2.3450427416290944], {icon: restsenebou}).addTo(map).bindPopup("Restaurant Braisenville <br>Restaurant gastronomique <br><a href='aboutbraisenvillegdnparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87965687964058, 2.3473591525924187], {icon: restsenebou}).addTo(map).bindPopup("Restaurant RAMDAM <br>Restaurant <br><a href='aboutramdamgdnparis.html'>Plus d'information</a>")
+
+
+
+
+
+var shopparisgdn = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88080167593928, 2.3450030695131754], {icon: shopparisgdn}).addTo(map).bindPopup("Atelier Dynamic Sport <br>Atelier de réparation pour motos <br><a href='aboutdynamicsportmotogdnparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87950984357233, 2.3434669984635503], {icon: restsenebou}).addTo(map).bindPopup("Thai House Restaurant <br>Restaurant thai <br><a href='aboutthaihouseparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8773028352072, 2.346155285227269], {icon: restsenebou}).addTo(map).bindPopup("Piccola Toscana <br>Restaurant italien <br><a href='aboutpiccolatoscanaparis.html'>Plus d'information</a>")
+
+
+
+
+var restsenebou = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88399231946849, 2.349740244233438], {icon: restsenebou}).addTo(map).bindPopup("Brasserie Barbès <br>Restaurant <br><a href='aboutbrasseriebarbesbarbesm4paris.html'>Plus d'information</a>")
+
+
+
+var smur2 = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.883439391252054, 2.348848873803633], {icon: smur2}).addTo(map).bindPopup("Pharmacie Lariboisière <br>Pharmacie proposant de l'homéopathie <br><a href='aboutsamulariboisierebarbesbarbesm4paris.html'>Plus d'information</a>")
+
+
+
+//STRET CAMERA OR STREET CAM BY SEARCHAREA
+//WITH A SAMSUNG GALAXY A04S
+//COPYRIGHT VIDEO SEARCHAREA AND AREA MAPS
+//FOR EMERGENCY OR OTHER QUESTION, PLEASE CONTACT WITH GOOGLE MAPS OR AREA MAPS
+//PLACE JEAN MOULIN, 95470 FOSSES, 95, ILE DE FRANCE, FRANCE, EUROPE
+
+
+
+var StreetCamera = L.icon({
+    iconUrl: 'streetcam.png',
+    iconSize: [20, 20],
+});
+
+var videoUrl = 'streetcama1.mp4'; // Remplacez par l'URL de votre vidéo
+
+var videoTag = '<video controls width="250"><source src="streetcama1.mp4" type="video/mp4"></video>';
+
+var popupContent = "Autoroute A1 direction Paris <br> " + videoTag + "<br><a href='aboutstreetcam.html'>Plus d'information</a>";
+
+L.marker([48.97544046497629, 2.4902648541465537], {icon: StreetCamera}).addTo(map).bindPopup(popupContent);
+
+
+
+
+var StreetCamera = L.icon({
+    iconUrl: 'streetcam.png',
+    iconSize: [20, 20],
+});
+
+var videoUrl = 'streetcamstwitz.mp4'; // Remplacez par l'URL de votre vidéo
+
+var videoTag = '<video controls width="250"><source src="streetcamstwitz.mp4" type="video/mp4"></video>';
+
+var popupContent = "D16 direction StWitz <br> " + videoTag + "<br><a href='aboutstreetcam.html'>Plus d'information</a>";
+
+L.marker([49.091564010745216, 2.532080451978009], {icon: StreetCamera}).addTo(map).bindPopup(popupContent);
+
+
+
+
+var StreetCamera = L.icon({
+    iconUrl: 'streetcam.png',
+    iconSize: [20, 20],
+});
+
+var videoUrl = 'streetcama1entrance.mp4'; // Remplacez par l'URL de votre vidéo
+
+var videoTag = '<video controls width="250"><source src="streetcama1entrance.mp4" type="video/mp4"></video>';
+
+var popupContent = "Entrée de l'A1 vers Paris <br> " + videoTag + "<br><a href='aboutstreetcam.html'>Plus d'information</a>";
+
+L.marker([49.0853896817837, 2.550419796181348], {icon: StreetCamera}).addTo(map).bindPopup(popupContent);
+
+
+
+
+
+var StreetCamera = L.icon({
+    iconUrl: 'streetcam.png',
+    iconSize: [20, 20],
+});
+
+var videoUrl = 'streetcama1cgdpont.mp4'; // Remplacez par l'URL de votre vidéo
+
+var videoTag = '<video controls width="250"><source src="streetcama1cgdpont.mp4" type="video/mp4"></video>';
+
+var popupContent = "Autoroute A1/E15 vers Paris, Aeroport CDG Tunnel <br> " + videoTag + "<br><a href='aboutstreetcam.html'>Plus d'information</a>";
+
+L.marker([49.026920000850346, 2.5370147918633346], {icon: StreetCamera}).addTo(map).bindPopup(popupContent);
+
+
+
+// FULL METRO 
+// EN RAISON DE PLUSIEURS PROBLEME LE SITE EST REPRIT PAR POLOOHYEAH AND DAMIRE SAUF POUR PORNZONE QUI EST TOUJOURS GERER PAR DRISS
+//COPYRIGHT SEARCHAREA AREAMAPS 2023 POLOOHYEAH AND DAMIRE
+//COPYRIGHT PORNZONE 2023 DRISS AND POLOOHYEAH
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88865018043566, 2.3928344778861517], {icon: metro}).addTo(map).bindPopup("Porte de Pantin <br>Metro 5 <br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.885138751833765, 2.379600037785457], {icon: metro}).addTo(map).bindPopup("Laumière <br>Metro 5 <br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8825877129185, 2.370091018595904], {icon: metro}).addTo(map).bindPopup("Jaurès <br>Metro 2, 5 et 7 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.884248869287006, 2.365724448103401], {icon: metro}).addTo(map).bindPopup("Stalingrad <br>Metro 2, 5 et 7<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.884392195317275, 2.360116406538416], {icon: metro}).addTo(map).bindPopup("La Chapelle <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87078834944378, 2.361046865684496], {icon: metro}).addTo(map).bindPopup("Jacques Bonsergent <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.867109010471864, 2.3635368934636247], {icon: metro}).addTo(map).bindPopup("République <br>Metro 3, 5 ,8 ,9 et 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86446209282737, 2.368715429507054], {icon: metro}).addTo(map).bindPopup("Oberkampf <br>Metro 5 et 9<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85981041614593, 2.371968664180993], {icon: metro}).addTo(map).bindPopup("Richard Lenoir <br>Metro 5 <br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85298602852374, 2.3687252475140954], {icon: metro}).addTo(map).bindPopup("Bastille <br>Metro 1, 5 et 8 <br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84616173758984, 2.3666172251281457], {icon: metro}).addTo(map).bindPopup("Quai de La Rapée <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84186879081281, 2.36604859688214], {icon: metro}).addTo(map).bindPopup("Gare d’Austerlitz <br>Metro 5 et 10<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83874211311531, 2.360704203099952], {icon: metro}).addTo(map).bindPopup("Saint-Marcel <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83557629737991, 2.358557242644847], {icon: metro}).addTo(map).bindPopup("Campo-Formio <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83111185761755, 2.35578819469701], {icon: metro}).addTo(map).bindPopup("Place d'Italie <br>Metro 5, 6 et 7<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8912579685663, 2.4023169701792413], {icon: metro}).addTo(map).bindPopup("Hoche <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89320169630227, 2.4133395218725893], {icon: metro}).addTo(map).bindPopup("Église de Pantin <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89537913222185, 2.4253027103012568], {icon: metro}).addTo(map).bindPopup("Bobigny - Pantin - Raymond Queneau <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.907005697507046, 2.4494382229495386], {icon: metro}).addTo(map).bindPopup("Bobigny-Pablo Picasso <br>Metro 5<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.881998795934244, 2.3935312089054643], {icon: metro}).addTo(map).bindPopup("Danube <br>Metro 7 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87979869509998, 2.398936206571589], {icon: metro}).addTo(map).bindPopup("Pré-Saint-Gervais <br>Metro 7 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87685055649129, 2.3929144698805795], {icon: metro}).addTo(map).bindPopup("Place des Fêtes <br>Metro 7 bis et 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87959467454067, 2.3891667720470005], {icon: metro}).addTo(map).bindPopup("Botzaris <br>Metro 7 bis et 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87811785879569, 2.3813224005900917], {icon: metro}).addTo(map).bindPopup("Buttes Chaumont <br>Metro 7 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88077621629404, 2.3740709670824485], {icon: metro}).addTo(map).bindPopup("Bolivar <br>Metro 7 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.881404832758285, 2.365255532309554], {icon: metro}).addTo(map).bindPopup("Louis Blanc <br>Metro 7 et 7 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85725745753184, 2.3521644655383867], {icon: metro}).addTo(map).bindPopup("Hôtel de Ville <br>Metro 1 et 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86129311416167, 2.353525320286348], {icon: metro}).addTo(map).bindPopup("Rambuteau <br>Metro 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.865395665378706, 2.3560969873131343], {icon: metro}).addTo(map).bindPopup("Arts et Métiers <br>Metro 3 et 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8699128228888, 2.3710048874943586], {icon: metro}).addTo(map).bindPopup("Goncourt <br>Metro 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.872033223406014, 2.377215584191497], {icon: metro}).addTo(map).bindPopup("Belleville <br>Metro 2 et 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87396400396031, 2.385291228074341], {icon: metro}).addTo(map).bindPopup("Pyrénées <br>Metro 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87542062643011, 2.398799325024971], {icon: metro}).addTo(map).bindPopup("Télégraphe <br>Metro 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.876881481155806, 2.4064905515977832], {icon: metro}).addTo(map).bindPopup("Porte des Lilas <br>Metro 3 bis et 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86813816856416, 2.401415812194199], {icon: metro}).addTo(map).bindPopup("Pelleport <br>Metro 3 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86511046690746, 2.398594128306269], {icon: metro}).addTo(map).bindPopup("Gambetta <br>Metro 3 et 3 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87159915923719, 2.4042201598018447], {icon: metro}).addTo(map).bindPopup("Saint-Fargeau <br>Metro 3 bis<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8796884329484, 2.416346444804593], {icon: metro}).addTo(map).bindPopup("Mairie des Lilas <br>Metro 11<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.864938310147615, 2.4166710844764228], {icon: metro}).addTo(map).bindPopup("Gallieni <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86436662366772, 2.4085869064971277], {icon: metro}).addTo(map).bindPopup("Porte de Bagnolet <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86267269947929, 2.387429641783639], {icon: metro}).addTo(map).bindPopup("Père Lachaise <br>Metro 2 et 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86401823408213, 2.3807903568912403], {icon: metro}).addTo(map).bindPopup("Rue Saint-Maur <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.865333673501596, 2.3745738306903714], {icon: metro}).addTo(map).bindPopup("Parmentier <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8666322847903, 2.3614846507154774], {icon: metro}).addTo(map).bindPopup("Temple <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.878883166317564, 2.322518555887339], {icon: metro}).addTo(map).bindPopup("Europe <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88246141184239, 2.3102255240998977], {icon: metro}).addTo(map).bindPopup("Malesherbes <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88399264754899, 2.304331600744393], {icon: metro}).addTo(map).bindPopup("Wagram <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88500182851724, 2.2974435052757034], {icon: metro}).addTo(map).bindPopup("Péreire <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8856603331873, 2.292598777313483], {icon: metro}).addTo(map).bindPopup("Porte de Champerret <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88879242104773, 2.2878726704159136], {icon: metro}).addTo(map).bindPopup("Louise Michel <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89217952342987, 2.2850981754404733], {icon: metro}).addTo(map).bindPopup("Anatole France <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.89785983565491, 2.2796799175637896], {icon: metro}).addTo(map).bindPopup("Pont de Levallois Bécon <br>Metro 3<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84853042322405, 2.396184426520402], {icon: metro}).addTo(map).bindPopup("Nation <br>Metro 1, 2, 6 et 9<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85131227785653, 2.39863167235181], {icon: metro}).addTo(map).bindPopup("Avron <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8563337080832, 2.3944055957163797], {icon: metro}).addTo(map).bindPopup("Alexandre Dumas <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.858314107117636, 2.389589751917913], {icon: metro}).addTo(map).bindPopup("Philippe Auguste <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86672077097734, 2.38315548254767], {icon: metro}).addTo(map).bindPopup("Ménilmontant <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86904935156131, 2.3804436288235746], {icon: metro}).addTo(map).bindPopup("Couronnes <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87796126117144, 2.3704932563919163], {icon: metro}).addTo(map).bindPopup("Colonel Fabien <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.88289590894933, 2.344079773715764], {icon: metro}).addTo(map).bindPopup("Anvers <br>Metro 2<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+//6
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.871647950658975, 2.2934970887687816], {icon: metro}).addTo(map).bindPopup("Kléber <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86693421571649, 2.2901653514827123], {icon: metro}).addTo(map).bindPopup("Boissière <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85759989195125, 2.28579032660928], {icon: metro}).addTo(map).bindPopup("Passy <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85392918161107, 2.2893055859816487], {icon: metro}).addTo(map).bindPopup("Bir-Hakeim <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85044463910681, 2.2935395851748486], {icon: metro}).addTo(map).bindPopup("Dupleix <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84881076225409, 2.298661358701632], {icon: metro}).addTo(map).bindPopup("La Motte - Picquet Grenelle <br>Metro 6, 8 et 10<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84751464390712, 2.303016552596203], {icon: metro}).addTo(map).bindPopup("Cambronne<br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84543404914367, 2.310198049229055], {icon: metro}).addTo(map).bindPopup("Sèvres-Lecourbe <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84288538881782, 2.312618216884777], {icon: metro}).addTo(map).bindPopup("Pasteur <br>Metro 6 et 12<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.841156911185486, 2.324964189864062], {icon: metro}).addTo(map).bindPopup("Edgar Quinet <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83903063797298, 2.3307880710600233], {icon: metro}).addTo(map).bindPopup("Raspail <br>Metro 4 et 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.834666468209214, 2.3324470490045544], {icon: metro}).addTo(map).bindPopup("Denfert-Rochereau <br>Metro 4 et 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83312707935152, 2.3364467853036377], {icon: metro}).addTo(map).bindPopup("Saint-Jacques <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83115338342416, 2.3434513709622267], {icon: metro}).addTo(map).bindPopup("Glacière <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82962161246669, 2.349700161683763], {icon: metro}).addTo(map).bindPopup("Corvisart <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83307785673868, 2.3625792814196296], {icon: metro}).addTo(map).bindPopup("Nationale <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83493559436533, 2.3680892514142386], {icon: metro}).addTo(map).bindPopup("Chevaleret <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83705336216614, 2.3727992557323243], {icon: metro}).addTo(map).bindPopup("Quai de La Gare <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83905835127611, 2.3895679744693465], {icon: metro}).addTo(map).bindPopup("Dugommier <br>Metro 6<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83942094814906, 2.3959413124377598], {icon: metro}).addTo(map).bindPopup("Daumesnil <br>Metro 6 et 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8417008809696, 2.4011129915481124], {icon: metro}).addTo(map).bindPopup("Bel-Air <br>Metro 6 et 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84502841044781, 2.402044825563829], {icon: metro}).addTo(map).bindPopup("Picpus <br>Metro 6 et 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.768952613394035, 2.464308891539961], {icon: metro}).addTo(map).bindPopup("Créteil - Pointe du Lac <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.77997553303236, 2.4597292904247876], {icon: metro}).addTo(map).bindPopup("Créteil - Préfecture <br>Metro 8 et BUS<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.78987940824152, 2.452164513581583], {icon: metro}).addTo(map).bindPopup("Créteil-Université <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.79644936890376, 2.4490766447307997], {icon: metro}).addTo(map).bindPopup("Créteil - L'échat <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.80399754091215, 2.4444626917025127], {icon: metro}).addTo(map).bindPopup("Maisons-Alfort Les Juilliottes <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.809176950492194, 2.4344956029901472], {icon: metro}).addTo(map).bindPopup("Maisons-Alfort Stade <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.81479385002033, 2.421996508997805], {icon: metro}).addTo(map).bindPopup("École Vétérinaire de Maisons-Alfort <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82151536826676, 2.413961662241737], {icon: metro}).addTo(map).bindPopup("Charenton - Écoles <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.82596395071121, 2.4066303724747926], {icon: metro}).addTo(map).bindPopup("Liberté <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83311173260749, 2.401676408455791], {icon: metro}).addTo(map).bindPopup("Porte de Charenton <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83539680036377, 2.40613995655272], {icon: metro}).addTo(map).bindPopup("Porte Dorée <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83692481127903, 2.4025743331774083], {icon: metro}).addTo(map).bindPopup("Michel Bizot <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8442375272288, 2.3901922522994212], {icon: metro}).addTo(map).bindPopup("Montgallet <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84733909364652, 2.3866409958991204], {icon: metro}).addTo(map).bindPopup("Reuilly – Diderot <br>Metro 1 et 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85014473560067, 2.3841223002213905], {icon: metro}).addTo(map).bindPopup("Faidherbe - Chaligny <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85116907777551, 2.37628169924318], {icon: metro}).addTo(map).bindPopup("Ledru-Rollin <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85757007901638, 2.3680959471252714], {icon: metro}).addTo(map).bindPopup("Chemin Vert <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86116277138517, 2.3672538657830047], {icon: metro}).addTo(map).bindPopup("Saint-Sébastien - Froissart <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86332833521626, 2.366679719409936], {icon: metro}).addTo(map).bindPopup("Filles du Calvaire <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.86624078688348, 2.323108389512823], {icon: metro}).addTo(map).bindPopup("Concorde <br>Metro 1, 8 et 12<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.85792264433898, 2.310234751988514], {icon: metro}).addTo(map).bindPopup("La Tour-Maubourg <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8544220641514, 2.3056670986611647], {icon: metro}).addTo(map).bindPopup("École Militaire <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84466615830686, 2.2937631306493613], {icon: metro}).addTo(map).bindPopup("Commerce <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.842645309975, 2.2915960853077477], {icon: metro}).addTo(map).bindPopup("Félix Faure <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.84108465941138, 2.2878823360104388], {icon: metro}).addTo(map).bindPopup("Boucicaut <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+
+L.marker([48.839028176139536, 2.2825375075248973], {icon: metro}).addTo(map).bindPopup("Lourmel <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+
+
+var metro = L.icon({
+    iconUrl: 'paris_metro_ratp.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.83680697456364, 2.2787864179233233], {icon: metro}).addTo(map).bindPopup("Balard <br>Metro 8<br><a href='aboutparismetroidf.html'>Plus d'information sur le Metro Parisien</a>");
+
+
+
+
+//bus fosses
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.095764442378226, 2.493088907302043], {icon: bus}).addTo(map).bindPopup("Cottages <br>BUS R2, R48, R108 et R117 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09524409440746, 2.487806488058877], {icon: bus}).addTo(map).bindPopup("Village <br>BUS R2, R48, R108, R117 et Soir <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09631137195698, 2.4876406235570734], {icon: bus}).addTo(map).bindPopup("Mairie Annexe <br>BUS R2 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.102317868320185, 2.5147661395254124], {icon: bus}).addTo(map).bindPopup("Beaumont <br>BUS R1, R121 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09941248837147, 2.5157234117949665], {icon: bus}).addTo(map).bindPopup("Centre Commercial / Mairie <br>BUS R1, R121 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09909374634225, 2.5133373413991023], {icon: bus}).addTo(map).bindPopup("Gendarmerie <br>BUS R1, R121 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.0992849240255, 2.508909276073909], {icon: bus}).addTo(map).bindPopup("Avenue du Large <br>BUS R1, R121 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.098600955540775, 2.504701186373359], {icon: bus}).addTo(map).bindPopup("Rue de l'Epine <br>BUS R1, R48 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.096424420784466, 2.5035268004390128], {icon: bus}).addTo(map).bindPopup("Haute Grève <br>BUS R1, R48 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.09459434512901, 2.4990206892832125], {icon: bus}).addTo(map).bindPopup("Bellevue <br>BUS R1, R48 et R108 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.091228160590966, 2.504870393420137], {icon: bus}).addTo(map).bindPopup("Cité Jardins <br>BUS R1 et R104 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.089329633893016, 2.5084633448578257], {icon: bus}).addTo(map).bindPopup("Bois Maillard <br>BUS R1 et R104 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.08589472343736, 2.506229692289806], {icon: bus}).addTo(map).bindPopup("Collège Françoise Dolto <br>BUS R1 et R112 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.08314979234936, 2.504586744147012], {icon: bus}).addTo(map).bindPopup("Rue des Prés <br>BUS R1 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.08004824709723, 2.5026816764608912], {icon: bus}).addTo(map).bindPopup("Place du Vert Clos <br>BUS R1 et R104 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.0787661914953, 2.4990553615877045], {icon: bus}).addTo(map).bindPopup("Mairie <br>BUS R1 et R104 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.075580786060456, 2.498676039964507], {icon: bus}).addTo(map).bindPopup("Salle des Fêtes <br>BUS R1 et R104 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.06120699089986, 2.499525667190755], {icon: bus}).addTo(map).bindPopup("Gymnase <br>BUS R1, R7, R105 et R107 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.05810473379509, 2.5004435291251665], {icon: bus}).addTo(map).bindPopup("Route de Marly <br>BUS R1, R7, R105 et R107 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.05702539018128, 2.500657796556933], {icon: bus}).addTo(map).bindPopup("Général Leclerc <br>BUS R1, R7, R105, R110 et R107 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.05435927814046, 2.5013961052436358], {icon: bus}).addTo(map).bindPopup("La Pépinière <br>BUS R1, R7, R105, R110, R113 et R107 <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.05117071005066, 2.50222649199688], {icon: bus}).addTo(map).bindPopup("Ecole Universalis <br>BUS R1, R5, R7 et Soir <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.04921502261436, 2.501328964758608], {icon: bus}).addTo(map).bindPopup("Gare de Louvres <br>BUS R1, R4, R5, R6, R7 et R117 et Soir <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+
+
+
+var bus = L.icon({
+    iconUrl: 'Paris_Bus_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.04879690799884, 2.500684644947744], {icon: bus}).addTo(map).bindPopup("Gare de Louvres <br>BUS N146 et Soir <br><a href='aboutbuskeolis.html'>Plus d'information sur les bus Keolis</a>");
+
+
+
+
+//NEW LOCATION
+
+
+
+
+var infoloc = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10675077257546, 2.944143020124259], {icon: infoloc}).addTo(map).bindPopup("Terrain Privée <br>Foret <br><a href='aboutprivatelocation.html'>Plus d'information sur les lieux privée</a>");
+
+
+
+var infoloc = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10760792392483, 2.943842043504015], {icon: infoloc}).addTo(map).bindPopup("Chemin Privée <br>Foret, Route <br><a href='aboutprivatelocation.html'>Plus d'information sur les lieux privée</a>");
+
+
+
+
+
+
+var shop95 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.104101584365665, 2.950318184644166], {icon: shop95}).addTo(map).bindPopup("Cabot'in <br>Magasin d'articles pour animaux <br><a href='aboutpetshop.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+var infoloc = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.104395351106575, 2.952963819464419], {icon: infoloc}).addTo(map).bindPopup("Mairie d'Acy en Multien <br>Foret, Route <br><a href='aboutmairieacymultien.html'>Plus d'information</a>");
+
+
+
+
+
+
+var shop95 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.104184631121385, 2.952926268537382], {icon: shop95}).addTo(map).bindPopup("Johanna Miasik Hair Stylist <br>Coiffeur à domicile <br><a href='abouthairshop.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+var eat95 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10336983875124, 2.9537523889093498], {icon: eat95}).addTo(map).bindPopup("Cafe Le Multien Presse <br>Café <br><a href='aboutcoffeeshop.html'>Plus d'information</a>");
+
+
+
+
+
+
+var eat95 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10305679312082, 2.9541154901333755], {icon: eat95}).addTo(map).bindPopup("Aux Délices D'acy <br>Boulangerie <br><a href='aboutpainshop.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+var shop95 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.102192274175664, 2.9546867499906595], {icon: shop95}).addTo(map).bindPopup("La Gergogne <br>Bureau de tabac <br><a href='abouttabacshop.html'>Plus d'information</a>");
+
+
+
+
+
+var shop95 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.10896216337738, 2.9551584884818887], {icon: shop95}).addTo(map).bindPopup("emm'harmonie <br>Institut de massages <br><a href='aboutmasseinstitshop.html'>Plus d'information</a>");
+
+
+
+
+
+var eat95 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.12752133952113, 2.6899534264132297], {icon: eat95}).addTo(map).bindPopup("Aux 7 Épis <br>Boulangerie <br><a href='aboutpainshop.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+
+var samu95 = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.12626687450523, 2.691809833017035], {icon: samu95}).addTo(map).bindPopup("Etablissement d'Accueil Médicalisé Coallia Pavillon GIRARDIN <br>Hopital <br><a href='aboutfrancehopital.html'>Plus d'information</a>");
+
+
+
+
+
+
+
+var eat95 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.12547160607525, 2.6937798490941933], {icon: eat95}).addTo(map).bindPopup("Le Relais de la Croix d'Or <br>Restaurant <br><a href='aboutrestaurantshop.html'>Plus d'information</a>");
+
+
+
+var eat95 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.12564694367315, 2.6937192447540106], {icon: eat95}).addTo(map).bindPopup("La Crêperie Du Parc <br>Restaurant <br><a href='aboutrestaurantshop.html'>Plus d'information</a>");
+
+
+
+
+
+var samu95 = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.12505150834006, 2.695373587095034], {icon: samu95}).addTo(map).bindPopup("Cabinet d'orthophonie <br>Orthophoniste <br><a href='aboutorthophonisteshop.html'>Plus d'information</a>");
+
+
+
+
+
+var parc95 = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([49.12770545962288, 2.697815584967094], {icon: parc95}).addTo(map).bindPopup("Pic nic mustang <br>Parc <br><a href='aboutfranceparc.html'>Plus d'information</a>");
+
+
+
+//NEW 09/12/2023
+
+
+
+var RESTPARIS9 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.876510119106655, 2.344891729836307], {icon: RESTPARIS9}).addTo(map).bindPopup("Mi Ranchito Paisa <br>Restaurant colombien");
+
+
+
+var RESTPARIS9 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87614569071419, 2.3441874332789703], {icon: RESTPARIS9}).addTo(map).bindPopup("McDonald's cadet <br>Restauration rapide");
+
+
+
+
+var BOUTIQUEPARIS9 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.875671972408774, 2.343455811361549], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("Optic 2000 - Opticien Paris 9 - Cadet<br>Opticien");
+
+
+var BOUTIQUEPARIS9 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87585190993018, 2.3429676483350783], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("Kodak Express Grands Boulevards<br>Photographe");
+
+
+
+var shopPARIS9 = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87595073661828, 2.344957017365485], {icon: shopPARIS9}).addTo(map).bindPopup("Intermarché EXPRESS Paris<br>Supermarché");
+
+
+
+var shopPARIS9 = L.icon({
+    iconUrl: 'kisspng-shopping-cart-software-computer-icons-shopping-leaflet-5ae188567edd41.2387930415247299425196-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87684429447969, 2.348024234726417], {icon: shopPARIS9}).addTo(map).bindPopup("U Express<br>Supermarché");
+
+
+var PARCPARIS9 = L.icon({
+    iconUrl: 'png-clipart-computer-icons-garden-others-miscellaneous-text-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87694371164333, 2.346486274772077], {icon: PARCPARIS9}).addTo(map).bindPopup("Square Montholon<br>Parc citadin");
+
+
+
+
+var RESTPARIS9 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8779799815912, 2.3522936562330883], {icon: RESTPARIS9}).addTo(map).bindPopup("Brasserie Riviera <br>Restaurant");
+
+
+
+var RESTPARIS9 = L.icon({
+    iconUrl: 'kisspng-knife-computer-icons-fork-spoon-clip-art-spoon-5ac3c8480eef64.3328208915227802320612.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87827280273514, 2.3525377386979014], {icon: RESTPARIS9}).addTo(map).bindPopup("Pizza 113 <br>Pizzeria");
+
+
+
+var BOUTIQUEPARIS9 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87845096303822, 2.353328991528689], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("Ria Money Transfer & Currency Exchange<br>Transfert d'argent");
+
+
+
+var samuPARIS9 = L.icon({
+    iconUrl: 'paris_samu_medecin-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87830558626872, 2.353595379133369], {icon: samuPARIS9}).addTo(map).bindPopup("Pharmacie Centrale du Nord<br>Pharmacie");
+
+
+
+
+var BOUTIQUEPARIS9 = L.icon({
+    iconUrl: 'paris_shop_icon.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.87905191208729, 2.354057053441847], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("EURO GOLD SILVER - Change et Achat Or Bijoux Lingot Diamants Bureau de Change - PARIS 10<br>Marchand d'or");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var SPECPARIS9 = L.icon({
+    iconUrl: 'png-clipart-white-and-blue-information-logo-information-sign-symbol-visitor-center-tourist-miscellaneous-blue-removebg-preview.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([48.8741758012105, 2.344659455756935], {icon: SPECPARIS9}).addTo(map).bindPopup("Les enfants du paradis<br>Salle de spectacles");
+
+
+
+
+
+
+
+
+L.marker([48.874897091750874, 2.343072974869386], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("Musée de la Franc-Maçonnerie<br>Musée d'histoire");
+
+
+
+L.marker([48.8741526414138, 2.342488250716961], {icon: restaurantgouss}).addTo(map).bindPopup("Faubourg 34<br>Restaurant Français");
+
+
+L.marker([48.87506472485686, 2.3412803999583893], {icon: restaurantgouss}).addTo(map).bindPopup("Madonna<br>Restaurant Italien");
+
+
+L.marker([48.87495887522653, 2.3444829557498448], {icon: restaurantgouss}).addTo(map).bindPopup("Abri Soba<br>Restaurant de nouilles au sarrasin (soba)");
+
+
+L.marker([48.87412269240164, 2.343662185117906], {icon: restaurantgouss}).addTo(map).bindPopup("PAPI Restaurant<br>Restaurant Italien");
+
+
+
+
+L.marker([48.873627379807914, 2.3321053072306626], {icon: shopPARIS9}).addTo(map).bindPopup("Galeries Lafayette Haussmann<br>Centre commercial");
+
+
+
+
+
+L.marker([48.87199727539559, 2.331622502154613], {icon: SPECPARIS9}).addTo(map).bindPopup("Palais Garnier<br>Opéra");
+
+
+
+
+
+
+
+
+
+L.marker([48.820069745996165, 2.292297082716219], {icon: busgouss}).addTo(map).bindPopup("Carrefour de l'Insurrection<br>BUS 126");
+
+
+L.marker([48.820978599113914, 2.289157493392398], {icon: busgouss}).addTo(map).bindPopup("Mairie - Centre Administratif<br>BUS 126");
+
+
+L.marker([48.822348095536256, 2.2849695792158893], {icon: busgouss}).addTo(map).bindPopup("Place du Maréchal de Lattre de Tassigny<br>BUS 126");
+
+
+L.marker([48.824437571660326, 2.2823506550683943], {icon: busgouss}).addTo(map).bindPopup("Général de Gaulle<br>BUS 126, 189 et N62");
+
+
+L.marker([48.8272050874002, 2.2790008896576475], {icon: busgouss}).addTo(map).bindPopup("Corentin Celton<br>BUS 126, 189, 394, Tuvim et N62");
+
+
+L.marker([48.82800420281946, 2.272174701586806], {icon: busgouss}).addTo(map).bindPopup("Victor Hugo<br>BUS 126");
+
+
+L.marker([48.82933127442529, 2.2633966527426304], {icon: busgouss}).addTo(map).bindPopup("Issy-Val de Seine<br>BUS 126");
+
+
+L.marker([48.83143560187063, 2.256539810301201], {icon: busgouss}).addTo(map).bindPopup("Quai du Point du Jour<br>BUS 126");
+
+
+L.marker([48.832286345903, 2.2524023207937534], {icon: busgouss}).addTo(map).bindPopup("Rue du Point du Jour<br>BUS 126");
+
+
+L.marker([48.83292945202025, 2.247412954238077], {icon: busgouss}).addTo(map).bindPopup("Danjou<br>BUS 126");
+
+
+L.marker([48.83400671685454, 2.243094031944752], {icon: busgouss}).addTo(map).bindPopup("Marcel Sembat<br>BUS 126");
+
+
+L.marker([48.83598947888297, 2.239086946584335], {icon: busgouss}).addTo(map).bindPopup("Hôtel de Ville<br>BUS 126");
+
+
+L.marker([48.83826794794588, 2.2338780993558403], {icon: busgouss}).addTo(map).bindPopup("Ancienne Mairie<br>BUS 126");
+
+
+L.marker([48.840986672293575, 2.227777521560647], {icon: busgouss}).addTo(map).bindPopup("Boulogne Pont de Saint-Cloud<br>BUS 126");
+
+
+L.marker([48.84139516913534, 2.220816233878664], {icon: busgouss}).addTo(map).bindPopup("La Colline<br>BUS 126");
+
+
+L.marker([48.84101569233026, 2.2220528070989034], {icon: busgouss}).addTo(map).bindPopup("Pont de Saint-Cloud - Rive Gauche<br>BUS 126");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+L.marker([48.76236268413118, 2.3587324979927353], {icon: shopPARIS9}).addTo(map).bindPopup("Marché International de Rungis<br>Marché de produits frais");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//STREET CAMERA BY SEARCHAREA
+//STREET CAMERA WITH A FREEYOND M5 AND 50MPX CAMERA
+//COPYRIGHT SEARCHAREA 2024-2025
+
+
+
+var StreetCamera = L.icon({
+    iconUrl: 'streetcam.png',
+    iconSize: [20, 20],
+});
+
+var videoUrl = 'avenuehenritogusto.mp4'; // Remplacez par l'URL de votre vidéo
+
+var videoTag = '<video controls width="250"><source src="avenuehenritogusto.mp4" type="video/mp4"></video>';
+
+var popupContent = "Avenue Henri Barbusse vers la Pharmacie <br> " + videoTag + "<br><a href='aboutstreetcam.html'>Plus d'information</a>";
+
+L.marker([49.09497341430729, 2.5081550785108258], {icon: StreetCamera}).addTo(map).bindPopup(popupContent);
+
+
+//NEW MARS
+
+var StreetCamera = L.icon({
+    iconUrl: 'streetcam.png',
+    iconSize: [20, 20],
+});
+
+var videoUrl = 'chapd924a.mp4'; // Remplacez par l'URL de votre vidéo
+
+var videoTag = '<video controls width="250"><source src="chapd924a.mp4" type="video/mp4"></video>';
+
+var popupContent = "Carrefour de Rue de Paris à D924A <br> " + videoTag + "<br><a href='aboutstreetcam.html'>Plus d'information</a>";
+
+L.marker([49.127405242207544, 2.5336443810151734], {icon: StreetCamera}).addTo(map).bindPopup(popupContent);
+
+
+
+var StreetCamera = L.icon({
+    iconUrl: 'streetcam.png',
+    iconSize: [20, 20],
+});
+
+var videoUrl = 'plsenlisbill.mp4'; // Remplacez par l'URL de votre vidéo
+
+var videoTag = '<video controls width="250"><source src="plsenlisbill.mp4" type="video/mp4"></video>';
+
+var popupContent = "Rond-Point Pl. du Chalet vers Carrefour Club billard Senlis <br> " + videoTag + "<br><a href='aboutstreetcam.html'>Plus d'information</a>";
+
+L.marker([49.206869544948105, 2.589829665204566], {icon: StreetCamera}).addTo(map).bindPopup(popupContent);
+
+
+
+
+//E.LECLERC PAR DRS
+//PEUT CONTENIR CERTAINE ERREUR DE LOCALISATION, GONESSE A ETE MIS A LE BLANC MESNIL (ERREUR CORIGE TKT PAS) 
+
+L.marker([48.98998601589738, 2.431748187681134], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc Gonesse<br>Hypermarché");
+L.marker([48.98426856812209, 2.364514059282223], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc DRIVE Groslay<br>Supermarché");
+L.marker([48.94844920077763, 2.467362057433551], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc DRIVE Blanc Mesnil<br>Supermarché");
+L.marker([48.9609044649219, 2.4985611997625012], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc DRIVE Aulnay-sous-Boisl<br>Supermarché");
+L.marker([48.94153811684353, 2.4435235132559274], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc Express Le Blanc Mesnil<br>Supermarché");
+L.marker([48.95404321425732, 2.333843474624321], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc EPINAY SUR SEINE<br>Hypermarché");
+L.marker([49.040433408804105, 2.3416760844204023], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc MOISSELLES<br>Hypermarché");
+L.marker([48.91172642134413, 2.4375130640515725], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc BOBIGNY<br>Hypermarché");
+L.marker([48.92418463655277, 2.4174545219700616], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc DRIVE La Courneuve<br>Supermarché");
+L.marker([48.95381444618889, 2.333854048956914], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc DRIVE Epinay<br>Supermarché");
+L.marker([48.93265289301491, 2.305437755703627], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc GENNEVILLIERSy<br>Hypermarché");
+
+
+
+
+
+
+
+
+
+
+
+
+// Nouveau 01/07/2024 à 21:50:56 ARCACHON FRANCE
+
+
+L.marker([44.614877326142185, -0.9421792005302619], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("MaxiConfig<br>Boutique d'informatique");
+
+L.marker([44.615149150217356, -0.9409389641017263], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("JA Menuiserie<br>Magasin de bricolage (stores et rideaux)");
+
+L.marker([44.61454294825173, -0.9418987116781855], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("Nails arts made by lea<br>Esthéticien");
+
+L.marker([44.6124882514282, -0.9425004460607754], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("Fullservicesauto<br>Station de Lavage automobile (ATTENTION : l'adresse peut être fausse)");
+
+L.marker([44.61268544495981, -0.9427548318281953], {icon: BOUTIQUEPARIS9}).addTo(map).bindPopup("Menuiserie Viallard SARL<br>Boutique de meubles");
+
+var attmaps = L.icon({
+    iconUrl: 'attentionmaps.png',
+    iconSize: [20, 20],
+
+});
+
+L.marker([44.61553614984161, -0.948803371722212], {icon: attmaps}).addTo(map).bindPopup("Attention ! <br> Intersection dangeureuse !");
+
+
+L.marker([44.61386064641215, -0.947115015449258], {icon: restsenebou}).addTo(map).bindPopup("La Baguette Magique<br>Boulangerie");
+
+L.marker([44.604646174525875, -0.937322912332035], {icon: restsenebou}).addTo(map).bindPopup("Restaurant Pizzeria-Bar Franco-Portuguais<br>Restaurant");
+
+L.marker([44.60458108809127, -0.9373244619582746], {icon: restsenebou}).addTo(map).bindPopup("Au Rendez Vous des Amis<br>Restaurant");
+
+L.marker([44.60469043869231, -0.9371468847904669], {icon: restsenebou}).addTo(map).bindPopup("Boulangerie Patisserie LARRIEU 33380 Mios<br>Boulangerie");
+
+L.marker([44.60548577158215, -0.936375010610019], {icon: restsenebou}).addTo(map).bindPopup("Jambons 10 Vins<br>Restaurant italien");
+
+L.marker([44.605402053606504, -0.9368388326888074], {icon: samu95}).addTo(map).bindPopup("Ambulances Braucourt<br>Service d'Urgence");
+
+L.marker([44.60547982978669, -0.939277809162183], {icon: info}).addTo(map).bindPopup("Mairie de Mios<br>Mairie et renseignement");
+
+L.marker([44.6079091953295, -0.9357504314473403], {icon: ecolegouss}).addTo(map).bindPopup("École élémentaire Les Écureuils<br>Ecole");
+
+L.marker([44.60872842076119, -0.9324022014939032], {icon: ecolegouss}).addTo(map).bindPopup("L'After School<br>École de langue");
+
+L.marker([44.60745719214355, -0.9373426289494893], {icon: ecolegouss}).addTo(map).bindPopup("École maternelle La Fauvette Pitchou<br>École maternelle");
+
+L.marker([44.60667465783469, -0.9406673969418579], {icon: info}).addTo(map).bindPopup("La Poste<br>Poste et couriels");
+
+L.marker([44.606275733031524, -0.9401519168555311], {icon: info}).addTo(map).bindPopup("Office de Tourisme Coeur du Bassin - Bureau d'Information Touristique de Mios<br>Poste et couriels");
+
+L.marker([44.61858252885695, -0.9195935282703709], {icon: shopPARIS9}).addTo(map).bindPopup("E.Leclerc Mios<br>Hypermarché");
+
+L.marker([44.63763802388157, -0.9600903804098253], {icon: shopPARIS9}).addTo(map).bindPopup("Auchan Facture - Biganos<br>Hypermarché");
+
+L.marker([44.636401990600135, -0.9582582427224163], {icon: restsenebou}).addTo(map).bindPopup("McDonald's<br>Fast Food");
+
+L.marker([44.63606816424684, -0.9579856481258685], {icon: restsenebou}).addTo(map).bindPopup("KFC Biganos<br>Fast Food");
+
+L.marker([44.63644597681706, -0.9554145501531999], {icon: restsenebou}).addTo(map).bindPopup("Marie Blachère Boulangerie Sandwicherie Tarterie<br>Boulangerie");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// SCRIPT DU CLIC DROIT POUR AVOIR LE PETIT MENU AVEC LA BARRE DE RECHERCHE
+
+
+
+
+            // Ajouter un écouteur d'événement pour le clic droit sur la carte
+            map.on('contextmenu', function(event) {
+                var menu = document.getElementById('custom-menu');
+                menu.style.left = event.containerPoint.x + 'px';
+                menu.style.top = event.containerPoint.y + 'px';
+                menu.style.display = 'block';
+            });
+
+            // Masquer le menu contextuel lorsque l'utilisateur clique à l'extérieur
+            document.addEventListener('click', function(event) {
+                var menu = document.getElementById('custom-menu');
+                if (!menu.contains(event.target)) {
+                    menu.style.display = 'none';
+                }
+            });
+
+            // Ajouter des actions pour chaque option de menu
+            document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('menu-option1').addEventListener('click', function() {
+        window.location.href = 'https://searcharea.ddns.net/'; // Rediriger vers la page 1
+    });
+
+    document.getElementById('menu-option2').addEventListener('click', function() {
+        window.location.href = 'https://searcharea.ddns.net/userposition.html'; // Rediriger vers la page 2
+    });
+
+    document.getElementById('menu-option3').addEventListener('click', function() {
+        window.location.href = 'https://searcharea.ddns.net/areamapsiti.html'; // Rediriger vers la page 1
+    });
+
+    document.getElementById('menu-option4').addEventListener('click', function() {
+        window.location.href = 'https://searcharea.ddns.net/areamaps/satview/index.html'; // Rediriger vers la page 2
+    });
+
+    document.getElementById('menu-option5').addEventListener('click', function() {
+        window.location.href = 'https://searcharea.ddns.net/streetcamera/index.html'; // Rediriger vers la page 1
+    });
+
+    document.getElementById('menu-option6').addEventListener('click', function() {
+        window.location.href = 'https://searcharea.ddns.net/contact/index.php'; // Rediriger vers la page 2
+    });
+
+    document.getElementById('menu-option8').addEventListener('click', function() {
+        window.location.href = 'printmaps.html'; // Rediriger vers la page 1
+    });
+});
+
+        
+
+
+
+
+  </script>
+  </div>
+<script>
+    function openPopup() {
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    window.onload = function() {
+      openPopup();
+    };
+  </script>
+  <div id="custom-menu" class="custom-menu">
+    <ul>
+        <img src="https://searcharea.ddns.net/logoareamenu.png">
+        <li id="menu-option1">Revenir sur SearchArea</li>
+        <li id="menu-option2">Ma Position GPS</li>
+        <li id="menu-option3">Itinéraires</li>
+        <li id="menu-option4">Voir les plans satelites</li>
+        <li id="menu-option5">Accèder aux Street Camera</li>
+        <li id="menu-option6">Une erreur ? Contactez nous !</li>
+        <li id="menu-option8">Imprimer</li>
+        <li id="menu-option7"><center><input type="text" id="search" placeholder="Effectuez une recherche..." onchange="openPage()" autocomplete="off"></center></li>
+        
+
+        <!-- Ajoutez autant d'options de menu que nécessaire -->
+    </ul>
+</div>
+<div id="popup">
+    <h3 style="font-family: sans-serif;">Petite Information concernant ce service :</h3><br>
+    <p style="font-family: sans-serif;">La barre de recherche a été déplacé dans le menu</p><br>
+	<p style="font-family: sans-serif;">Découvrez la Street Camera <a href="aboutstreetcam.html">en savoir plus</a></p><br>
+    <p style="font-family: sans-serif;">NOUVEAU : Faites un clic droit pour accèder au menu de la carte !</p><br>
+    <button onclick="closePopup()">Accèder à Maps</button>
+  </div>
+<style>
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f9f9f9;
+      padding: 20px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+    }
+  </style>
+  </body>
+  <script>
+//AREA MAPS BY POLOOHYEAH
+//NEW AREA MAPS BY POLOOHYEAH AND DRS
+</script>
+</html>
