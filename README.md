@@ -4,7 +4,7 @@ Dernière version d'Area Maps avec le nouveau menu via le clic droit et les dern
 
 Dans cette nouvelle version d'Area Maps (pas encore mise en ligne sur le serveur), nous avons ajouté une dizaine de lieux pour les villes de Mios et de Biganos.
 
-# Ceux qu'il y avait déja avant : 
+# Ceux qu'il y avait déjà avant : 
 
 - Street Camera
 - Fonction de géolocalisation
